@@ -4,8 +4,14 @@ from app.models import db, User
 # Adds a demo user, you can add other users here if you want
 def seed_users():
 
-    demo = User(username='Demo', email='demo@aa.io',
-                password='password')
+    demo = User(
+        email='demo@aa.io',
+        first_name='Demo User',
+        last_name='',
+        country='United States',
+        image_url='https://soarview.s3.amazonaws.com/default-user.png',
+        password='password',
+        )
 
     db.session.add(demo)
 
