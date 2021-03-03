@@ -8,7 +8,7 @@ def seed_users():
         email='demo@aa.io',
         first_name='Demo User',
         last_name='',
-        country='United States',
+        country='United States of America',
         image_url='https://soarview.s3.amazonaws.com/default-user.png',
         password='password',
         )
