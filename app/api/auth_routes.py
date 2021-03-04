@@ -60,12 +60,20 @@ def sign_up():
     """
     Creates a new user and logs them in
     """
+
+    # S3 Logic
+    url = ''
+
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print("FORM", form)
     if form.validate_on_submit():
         user = User(
-            username=form.data['username'],
             email=form.data['email'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
+            country=form.data['country'],
+            image_url=url,
             password=form.data['password']
         )
         db.session.add(user)
