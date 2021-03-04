@@ -10,7 +10,7 @@ class Comment(db.Model):
     flight_id = db.Column(db.Integer, db.ForeignKey(
         'flights.id'), nullable=False)
     comment = db.Column(db.Text, nullable=False)
-    created_at = db.Column(db.Datetime, nullable=False, default=datetime.now())
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     flights = db.relationship('Flight', back_populates='comments')
     user = db.relationship('User', back_populates='comments')

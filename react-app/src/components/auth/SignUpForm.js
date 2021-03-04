@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../services/auth';
+import { setUser } from "../../store/session";
 
 const SignUpForm = ({authenticated, setAuthenticated}) => {
+  const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,6 +17,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
       const user = await signUp(username, email, password);
       if (!user.errors) {
         setAuthenticated(true);
+        dispatch(setUser(user));
       }
     }
   };
@@ -77,7 +81,9 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
           required={true}
         ></input>
       </div>
-      <button type="submit">Sign Up</button>
+      <button
+        className="bg-accent text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+        type="submit">Sign Up</button>
     </form>
   );
 };
