@@ -12,7 +12,7 @@ const LogoutButton = ({setAuthenticated}) => {
     dispatch(removeUser());
   };
 
-  return <button onClick={onLogout}>Logout</button>;
+  return <button className='py-2 w-full' onClick={onLogout}>Logout</button>;
 };
 
 export default LogoutButton;

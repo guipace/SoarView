@@ -1,36 +1,43 @@
 import React from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 
 const NavBar = ({ setAuthenticated }) => {
+  const sessionUser = useSelector(state => state.session.user)
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+
   return (
-    <nav>
-      <ul>
-        <li>
-          <NavLink to="/" exact={true} activeClassName="active">
-            Home
+    sessionUser && (
+      <>
+
+        <nav className='fixed w-full flex items-center shadow-xl bg-primary h-20 font-noto text-accent font-bold uppercase'>
+          <NavLink className='hover:bg-secondary h-full flex items-center' to="/" exact={true} activeClassName="active">
+            <img className='h-20 mx-5' src='https://soarview.s3.amazonaws.com/logo_text.png' alt='logo' />
           </NavLink>
-        </li>
-        <li>
-          <NavLink to="/login" exact={true} activeClassName="active">
-            Login
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/sign-up" exact={true} activeClassName="active">
-            Sign Up
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/users" exact={true} activeClassName="active">
-            Users
-          </NavLink>
-        </li>
-        <li>
-          <LogoutButton setAuthenticated={setAuthenticated} />
-        </li>
-      </ul>
-    </nav>
+          <div className='flex-grow'></div>
+          <div className='flex items-center h-full'>
+            <NavLink className='px-5 hover:no-underline hover:bg-secondary h-full flex items-center text-center tracking-widest' to="/" exact={true} activeClassName="active">
+              Upload
+              <br />
+              Flight
+            </NavLink>
+            <div className='cursor-pointer' >
+              <img className='h-16 mx-5 rounded-full bg-secondary cursor-pointer transform hover:scale-105 hover:shadow' onClick={() => setDropdownVisible(prev => !prev)} src={sessionUser.image_url} alt='user avatar' />
+            </div>
+          </div>
+        </nav>
+        <div id='navbar-placeholder' className='h-20'></div>
+        {dropdownVisible &&
+          <div className='bg-primary w-32 fixed right-0 flex flex-col' onMouseLeave={() => setDropdownVisible(prev => !prev)}>
+            <div className='text-center	py-2 hover:bg-secondary'>My Profile</div>
+            <div className='hover:bg-secondary'>
+              <LogoutButton setAuthenticated={setAuthenticated} />
+            </div>
+          </div>}
+      </>
+    )
   );
 }
 
