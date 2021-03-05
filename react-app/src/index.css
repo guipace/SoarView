@@ -18,6 +18,12 @@
     h5 {
         @apply text-lg;
     }
+    input {
+        @apply px-2 py-1
+    }
+    a:hover {
+        @apply underline font-bold
+    }
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans&family=Hind&family=Noto+Sans&display=swap');
