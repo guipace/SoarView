@@ -6,6 +6,7 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./services/auth";
 import LandingPage from "./components/LandingPage";
+import Footer from "./components/auth/Footer";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -36,9 +37,10 @@ function App() {
           <User />
         </ProtectedRoute>
         <Route path="/" exact={true} authenticated={authenticated}>
-          {authenticated ? <h1>PLACEHOLDER FOR HOME PAGE COMPONENT</h1> : <LandingPage setAuthenticated={setAuthenticated}/>}
+          {authenticated ? <div className='h-screen'>PLACEHOLDER FOR HOME PAGE COMPONENT</div> : <LandingPage setAuthenticated={setAuthenticated}/>}
         </Route>
       </Switch>
+      {authenticated && <Footer />}
     </BrowserRouter>
   );
 }
