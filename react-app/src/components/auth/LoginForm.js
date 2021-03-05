@@ -33,7 +33,7 @@ const LoginForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated }) 
       <div className='flex pb-2'>
         <label className='w-1/4'>Email</label>
         <input
-          className='flex-grow ml-2 px-2'
+          className='flex-grow ml-2'
           type="text"
           name="email"
           placeholder="Email"
@@ -44,7 +44,7 @@ const LoginForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated }) 
       <div className='flex pb-2'>
         <label className='w-1/4'>Password</label>
         <input
-          className='flex-grow ml-2 px-2'
+          className='flex-grow ml-2'
           type="password"
           name="password"
           placeholder="Password"

@@ -41,7 +41,7 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
       <div className='flex pb-2'>
         <label className='w-1/4'>Email</label>
         <input
-          className='flex-grow ml-2 px-2'
+          className='flex-grow ml-2'
           type="text"
           name="email"
           placeholder="Email"
@@ -52,7 +52,7 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
       <div className='flex pb-2'>
         <label className='w-1/4'>First Name</label>
         <input
-          className='flex-grow ml-2 px-2'
+          className='flex-grow ml-2'
           type="text"
           name="firstName"
           placeholder="First Name"
@@ -63,7 +63,7 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
       <div className='flex pb-2'>
         <label className='w-1/4'>Last Name</label>
         <input
-          className='flex-grow ml-2 px-2'
+          className='flex-grow ml-2'
           type="text"
           name="lastName"
           placeholder="Last Name"
@@ -74,7 +74,7 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
       <div className='flex pb-2'>
         <label className='w-1/4'>Country</label>
         <input
-          className='flex-grow ml-2 px-2'
+          className='flex-grow ml-2'
           type="text"
           name="country"
           placeholder="Country"
@@ -85,7 +85,7 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
       <div className='flex pb-2'>
         <label className='w-1/4'>Image</label>
         <input
-          className='flex-grow ml-2 px-2'
+          className='flex-grow ml-2'
           type="file"
           name="imageFile"
           onChange={e => setImageFile(e.target.files[0])}
@@ -94,7 +94,7 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
       <div className='flex pb-2'>
         <label className='w-1/4'>Password</label>
         <input
-          className='flex-grow ml-2 px-2'
+          className='flex-grow ml-2'
           type="password"
           name="password"
           placeholder="Password"
@@ -105,7 +105,7 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
       <div className='flex pb-2'>
         <label className='w-1/4'></label>
         <input
-          className='flex-grow ml-2 px-2'
+          className='flex-grow ml-2'
           type="password"
           name="repeat_password"
           placeholder="Confirm Password"
