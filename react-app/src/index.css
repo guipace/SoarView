@@ -22,7 +22,7 @@
         @apply px-2 py-1
     }
     a:hover {
-        @apply underline font-bold
+        @apply underline
     }
 }
 

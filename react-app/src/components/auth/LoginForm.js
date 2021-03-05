@@ -55,6 +55,9 @@ const LoginForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated }) 
       <button
         className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
         type="submit">Log In</button>
+      {/* <button
+        className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
+        type="submit">Demo Account</button> */}
       <div className='self-center text-sm'>Not yet a member? <span className='text-accent cursor-pointer' onClick={() => {setShowLoginModal(false); setShowSignupModal(true)}}>Sign up here.</span></div>
     </form>
   );
