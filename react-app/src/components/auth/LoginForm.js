@@ -21,6 +21,15 @@ const LoginForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated }) 
     }
   };
 
+  const loginDemo = async () => {
+    const user = await login('demo@email.com', 'password');
+    if (!user.errors) {
+      setAuthenticated(true);
+      dispatch(setUser(user));
+    } else {
+      setErrors(user.errors);
+    }
+  }
   // if (authenticated) {
   //   return <Redirect to="/" />;
   // }
@@ -52,12 +61,15 @@ const LoginForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated }) 
           value={password}
         ></input>
       </div>
-      <button
-        className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
-        type="submit">Log In</button>
-      {/* <button
-        className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
-        type="submit">Demo Account</button> */}
+      <div className='flex justify-center'>
+        <button
+          className="self-center w-28 h-12 mx-2 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
+          type="submit">Log In</button>
+        <button
+          onClick={e => loginDemo()}
+          className="self-center w-28 h-12 mx-2 bg-accent text-background font-bold uppercase text-sm px-6 py-auto my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
+          type="submit">Demo Account</button>
+      </div>
       <div className='self-center text-sm'>Not yet a member? <span className='text-accent cursor-pointer' onClick={() => {setShowLoginModal(false); setShowSignupModal(true)}}>Sign up here.</span></div>
     </form>
   );
