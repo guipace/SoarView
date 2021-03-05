@@ -3,6 +3,7 @@ import botocore
 from datetime import datetime
 from .config import Config
 
+ALLOWED_EXTENSIONS = {'igc', 'png', 'jpg', 'jpeg', 'gif', 'tiff', 'jfif'}
 
 s3 = boto3.client(
     "s3",
@@ -11,12 +12,23 @@ s3 = boto3.client(
 )
 
 
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 def upload_file_to_s3(file, bucket_name, acl="public-read"):
+
+    try:
+        if not allowed_file(file.filename):
+            raise Exception('File type is not accepted')
+    except Exception as e:
+        print("Something Happened: ", e)
+        return e
 
     filename = f"{file.filename}-{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
 
     try:
-
         s3.upload_fileobj(
             file,
             bucket_name,
