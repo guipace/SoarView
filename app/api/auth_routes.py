@@ -3,6 +3,8 @@ from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from app.aws_s3 import s3, upload_file_to_s3
+from app.config import Config
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -60,12 +62,22 @@ def sign_up():
     """
     Creates a new user and logs them in
     """
+
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
+    url = ''
+    if request.files:
+        url = upload_file_to_s3(request.files['image_file'], Config.S3_BUCKET)
+
     if form.validate_on_submit():
+
         user = User(
-            username=form.data['username'],
             email=form.data['email'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
+            country=form.data['country'],
+            image_url=url or 'https://soarview.s3.amazonaws.com/default-user.png',
             password=form.data['password']
         )
         db.session.add(user)
