@@ -18,7 +18,7 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
     e.preventDefault();
     if (password === repeatPassword) {
 
-      const user = await signUp(email, firstName, lastName, country, password);
+      const user = await signUp(email, firstName, lastName, country, imageFile, password);
 
       if (!user.errors) {
         setAuthenticated(true);
@@ -89,7 +89,6 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
           type="file"
           name="imageFile"
           onChange={e => setImageFile(e.target.files[0])}
-          value={imageFile}
         ></input>
       </div>
       <div className='flex pb-2'>
