@@ -1,5 +1,6 @@
 import LoginForm from './auth/LoginForm';
-import SignUpForm from './auth/SignUpForm'
+import SignUpForm from './auth/SignUpForm';
+import UploadForm from './UploadForm';
 
 export function LoginModal({ showLoginModal, setShowLoginModal, setShowSignupModal, setAuthenticated }) {
   return (
@@ -61,6 +62,41 @@ export function SignupModal({ showSignupModal, setShowSignupModal, setShowLoginM
               {/*body*/}
               <div className="relative px-6 pb-3 flex-auto">
                 <SignUpForm setAuthenticated={setAuthenticated} setShowLoginModal={setShowLoginModal} setShowSignupModal={setShowSignupModal}/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+      </>
+    ) : null
+  );
+}
+
+export function UploadModal({ showUploadModal, setShowUploadModal }) {
+  return (
+    showUploadModal ? (
+      <>
+        <div
+          className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+          onClick={() => setShowUploadModal(false)}
+        >
+          <div className="relative w-auto my-6 mx-auto max-w-3xl" onClick={(e) => e.stopPropagation()}>
+            {/*content*/}
+            <div className="border-0 rounded shadow-lg relative flex flex-col w-full bg-background outline-none focus:outline-none">
+              {/*header*/}
+              <div className="flex items-center justify-between p-5 border-b border-solid border-gray-300 rounded-t">
+                <img className='max-h-10	mr-2' src='https://soarview.s3.amazonaws.com/logo_no_text.png' alt='logo' />
+                <h2 className="font-fira">Upload a Flight</h2>
+                <button
+                  className="p-1 ml-auto bg-transparent border-0 text-black opacity-30 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                  onClick={() => setShowUploadModal(false)}
+                >
+                    ×
+                </button>
+              </div>
+              {/*body*/}
+              <div className="relative px-6 pb-3 flex-auto">
+                <UploadForm setShowUploadModal={setShowUploadModal}/>
               </div>
             </div>
           </div>
