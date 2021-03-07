@@ -32,7 +32,7 @@ const NavBar = ({ setAuthenticated }) => {
         </nav>
         <div id='navbar-placeholder' className='h-20'></div>
         {dropdownVisible &&
-          <div className='bg-primary w-32 fixed top-20 right-0 flex flex-col' onMouseLeave={() => setDropdownVisible(prev => !prev)}>
+          <div className='bg-primary w-32 fixed top-20 right-0 flex flex-col z-50' onMouseLeave={() => setDropdownVisible(prev => !prev)}>
             <div className='text-center	py-2 hover:bg-secondary'>My Profile</div>
             <div className='hover:bg-secondary'>
               <LogoutButton setAuthenticated={setAuthenticated} />

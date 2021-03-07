@@ -2,13 +2,13 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import userReducer from './user';
-// import flightReducer from './flights'
+import flightReducer from './flight'
 // import commentReducer from './comments';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
-    users: userReducer,
-    // flights: flightReducer,
+    user: userReducer,
+    flight: flightReducer,
     // comments:commentReducer,
 })
 

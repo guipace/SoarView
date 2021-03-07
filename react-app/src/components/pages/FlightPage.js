@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import MapWrapper from '../MapWrapper';
 
-import GeoJSON from 'ol/format/GeoJSON'
+import IGC from 'ol/format/IGC';
 import Feature from 'ol/Feature';
 
 function FlightPage() {
@@ -11,38 +11,36 @@ function FlightPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const flight = useSelector(state => state.flight);
-
+  const [ igcData, setIgcData ] = useState();
   const [ features, setFeatures ] = useState([])
 
+
+  // useEffect(() => {
+  //   //dispatch get flight from db and into redux
+  // }, [])
+
   useEffect(() => {
-    //dispatch get flight from db and into redux
-
-    return () => {
-
+    const fetchIgcData = async (url) => {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const text = await blob.text();
+      setIgcData(text);
     }
-  }, [])
+    fetchIgcData('https://soarview.s3.amazonaws.com/12sv1wz1.igc');
+  }, []);
 
   useEffect( () => {
 
-    const fetchedFeatures = require('./mock-geoson-api.json');
-
-    // console.log('FEATURES', fetchedFeatures)
+    let igcFormat = new IGC();
 
     // parse fetched geojson into OpenLayers features
-    //  use options to convert feature from EPSG:4326 to EPSG:3857
-    const wktOptions = {
-      dataProjection: 'EPSG:4326',
-      featureProjection: 'EPSG:3857'
-    }
+    const features = igcFormat.readFeatures(igcData, {
+      featureProjection: 'EPSG:3857',
+    });
 
-    const parsedFeatures = new GeoJSON().readFeatures(fetchedFeatures, wktOptions)
-
-    // set features into state (which will be passed into OpenLayers
-    //  map component as props)
-    setFeatures(parsedFeatures)
-    console.log("FEATURES", parsedFeatures);
-  },[])
-
+    // set features into state (which will be passed into OpenLayers map component as props)
+    setFeatures(features)
+  },[igcData])
 
   return (
     <div className='flex-1 flex flex-col md:flex-row'>

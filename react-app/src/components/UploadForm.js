@@ -10,15 +10,33 @@ const UploadForm = ({ setShowUploadModal }) => {
   const onUpload = async (e) => {
     e.preventDefault();
 
-    // SOLUTION 1 - FROM URL
-    let igcText = await fetch('https://soarview.s3.amazonaws.com/12sv1wz1.igc').then(res => res.blob()).then(blob => blob.text())
-    
-    try {
-      let igcData = IGCParser.parse(igcText);
-      console.log(igcData);
-    } catch (err) {
-      console.error(err);
+    const form = new FormData();
+    form.append('igcFile', igcFile);
+
+    const response = await fetch('api/flight', {
+      method: "POST",
+      body: form,
+    });
+
+    const flight = await response.json();
+
+    if (!flight.errors) {
+      dispatch(setFlight(flight));
+      // TODO: redirect to new flight page
+    } else {
+      setErrors(flight.errors);
     }
+
+
+    // SOLUTION 1 - FROM URL
+    // let igcText = await fetch('https://soarview.s3.amazonaws.com/12sv1wz1.igc').then(res => res.blob()).then(blob => blob.text())
+
+    // try {
+    //   let igcData = IGCParser.parse(igcText);
+    //   console.log(igcData);
+    // } catch (err) {
+    //   console.error(err);
+    // }
 
     // // SOLUTION 2 - FROM FILE OBJECT
     // let reader = new FileReader();
