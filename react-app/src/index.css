@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+    /* body {
+        @apply min-h-screen
+    } */
     h1 {
         @apply text-4xl;
     }

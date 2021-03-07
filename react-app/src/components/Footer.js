@@ -6,9 +6,7 @@ const Footer = () => {
 
   return (
     sessionUser && (
-      <>
         <div className='w-full bg-primary bottom-0'>FOOTER PLACEHOLDER</div>
-      </>
     )
   );
 }

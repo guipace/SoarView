@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LoginModal, SignupModal } from './Modals';
+import { LoginModal, SignupModal } from '../Modals';
 
 function LandingPage({setAuthenticated}) {
   const [showLoginModal, setShowLoginModal] = useState(false);
