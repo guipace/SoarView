@@ -6,7 +6,7 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import XYZ from 'ol/source/XYZ';
 import { transform } from 'ol/proj';
-import { toStringXY } from 'ol/coordinate';
+
 
 function MapWrapper(props) {
   const [ map, setMap ] = useState();
@@ -32,7 +32,6 @@ function MapWrapper(props) {
     const initialMap = new Map({
       target: mapElement.current,
       layers: [
-
         // USGS Topo
         new TileLayer({
           source: new XYZ({
@@ -74,9 +73,7 @@ function MapWrapper(props) {
       map.getView().fit(featuresLayer.getSource().getExtent(), {
         padding: [100, 100, 100, 100]
       });
-
     }
-
   }, [props.features]);
 
 
