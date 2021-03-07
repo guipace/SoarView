@@ -40,6 +40,7 @@ const UploadForm = ({ setShowUploadModal }) => {
   useEffect(() => {
     //Populate form with IGC file data
     if (igcData) {
+      igcData.date && setDate(igcData.date);
       igcData.pilot && setPilot(igcData.pilot);
       igcData.copilot && setCopilot(igcData.copilot);
       igcData.gliderType && setGliderModel(igcData.gliderType);
@@ -54,8 +55,15 @@ const UploadForm = ({ setShowUploadModal }) => {
 
     const form = new FormData();
     form.append('igcFile', igcFile);
-    form.append()
-
+    form.append('date', date);
+    form.append('pilot', pilot);
+    form.append('copilot', copilot);
+    form.append('glider_model', glider_model);
+    form.append('glider_class', glider_class);
+    form.append('callsign', callsign);
+    form.append('registration', registration);
+    form.append('notes', notes);
+    console.log('HITTING A ------------------------------------')
     const response = await fetch('api/flight', {
       method: "POST",
       body: form,

@@ -9,16 +9,17 @@ from .auth_routes import validation_errors_to_error_messages
 flight_routes = Blueprint('flight', __name__)
 
 
-@flight_routes.route('/flight', methods=['POST'])
+@flight_routes.route('/', methods=['POST'])
 @login_required
 def uploadFlight():
+    print('HITTING 1 ------------------------------------')
     form = FlightForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
+    print('HITTING 2 ------------------------------------')
     url = ''
     if request.files:
         url = upload_file_to_s3(request.files['igcFile'], Config.S3_BUCKET)
-
+    print('HITTING 3 ------------------------------------')
     if form.validate_on_submit():
         flight = Flight(
             image_url=url,
