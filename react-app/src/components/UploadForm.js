@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setFlight } from '../store/flight';
 import IGCParser from 'igc-parser'
+import { Redirect } from "react-router";
 
 const UploadForm = ({ setShowUploadModal }) => {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user);
   const [errors, setErrors] = useState([]);
   const [igcFile, setIgcFile] = useState('');
   const [igcData, setIgcData] = useState('');
@@ -54,6 +56,7 @@ const UploadForm = ({ setShowUploadModal }) => {
     e.preventDefault();
 
     const form = new FormData();
+    form.append('user_id', user.id);
     form.append('igcFile', igcFile);
     form.append('date', date);
     form.append('pilot', pilot);
@@ -63,17 +66,17 @@ const UploadForm = ({ setShowUploadModal }) => {
     form.append('callsign', callsign);
     form.append('registration', registration);
     form.append('notes', notes);
-    console.log('HITTING A ------------------------------------')
-    const response = await fetch('api/flight', {
+
+    const response = await fetch("/api/flight/", {
       method: "POST",
       body: form,
     });
 
     const flight = await response.json();
-
+    console.log('NEW FLIGHT', flight)
     if (!flight.errors) {
       dispatch(setFlight(flight));
-      // TODO: redirect to new flight page
+      return  <Redirect  to={`/flight/${flight.id}`} />
     } else {
       setErrors(flight.errors);
     }

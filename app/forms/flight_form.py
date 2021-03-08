@@ -1,9 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, IntegerField
 from wtforms.validators import DataRequired
 
 
 class FlightForm(FlaskForm):
+    user_id = IntegerField('user_id', validators=[DataRequired()])
     igcFile = StringField('igcFile', validators=[DataRequired()])
     date = StringField('date', validators=[DataRequired()])
     pilot = StringField('pilot', validators=[DataRequired()])

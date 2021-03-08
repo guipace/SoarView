@@ -35,7 +35,7 @@ class Flight(db.Model):
             "callsign": self.callsign,
             "registration": self.registration,
             "notes": self.notes,
-            "user": user.id,
+            "user": [user.id for user in self.user],
             "comments": [comment.id for comment in self.comments],
             "created_at": self.created_at,
             "updated_at": self.updated_at,
