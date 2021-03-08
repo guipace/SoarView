@@ -42,4 +42,4 @@ def uploadFlight():
 @login_required
 def flight(id):
     flight = Flight.query.get(id)
-    return flight.to_dict()
+    return flight.to_dict_nested()

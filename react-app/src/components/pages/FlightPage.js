@@ -3,9 +3,10 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFlight } from '../../store/flight';
 import MapWrapper from '../MapWrapper';
+import FlightSidebar from '../components/FlightSidebar';
 
 import IGC from 'ol/format/IGC';
-import Feature from 'ol/Feature';
+// import Feature from 'ol/Feature';
 
 function FlightPage() {
   const { id } = useParams();
@@ -28,14 +29,15 @@ function FlightPage() {
       const text = await blob.text();
       setIgcData(text);
     }
-    fetchIgcData('https://soarview.s3.amazonaws.com/12sv1wz1.igc');
-  }, []);
+    if (flight) {
+      fetchIgcData(flight.igc_url);
+    }
+  }, [flight]);
 
   useEffect( () => {
-
     let igcFormat = new IGC();
 
-    // parse fetched geojson into OpenLayers features
+    // parse fetched IGC into OpenLayers features
     const features = igcFormat.readFeatures(igcData, {
       featureProjection: 'EPSG:3857',
     });
@@ -47,7 +49,7 @@ function FlightPage() {
   return (
     <div className='flex-1 flex flex-col md:flex-row'>
       <MapWrapper features={features} />
-      <div className='w-full md:w-3/12 md:order-1'>PLACEHOLDER FOR SIDEBAR COMPONENT</div>
+      <FlightSidebar sessionUser={sessionUser} flight={flight}/>
     </div>
   )
 }

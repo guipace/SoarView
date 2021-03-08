@@ -14,13 +14,13 @@ const NavBar = ({ setAuthenticated }) => {
     sessionUser && (
       <>
         <UploadModal showUploadModal={showUploadModal} setShowUploadModal={setShowUploadModal} />
-        <nav className='fixed w-full flex items-center shadow-xl bg-primary h-20 font-noto text-accent font-bold uppercase'>
+        <nav className='fixed w-full flex items-center shadow-xl bg-primary h-20 text-accent font-bold z-50'>
           <NavLink className='hover:bg-secondary h-full flex items-center' to="/" exact={true} activeClassName="active">
             <img className='h-20 mx-5' src='https://soarview.s3.amazonaws.com/logo_text.png' alt='logo' />
           </NavLink>
-          <div className='flex-grow'></div>
+          <div className='flex-grow text-center font-hind text-6xl font-light'><span className='tracking-widest'>Soar</span><span className='tracking-widest'>vieW</span></div>
           <div className='flex items-center h-full'>
-            <div className='px-5 hover:no-underline hover:bg-secondary h-full flex items-center text-center tracking-widest cursor-pointer' onClick={() => setShowUploadModal(true)}>
+            <div className='px-5 hover:no-underline hover:bg-secondary h-full flex items-center text-center tracking-widest cursor-pointer font-noto uppercase' onClick={() => setShowUploadModal(true)}>
               Upload
               <br />
               Flight
