@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setFlight } from '../store/flight';
+import { useSelector } from "react-redux";
 import IGCParser from 'igc-parser'
-import { Redirect } from "react-router";
+import { useHistory } from "react-router";
 
 const UploadForm = ({ setShowUploadModal }) => {
-  const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user);
+  const history = useHistory();
+  const sessionUser = useSelector(state => state.session.user);
   const [errors, setErrors] = useState([]);
   const [igcFile, setIgcFile] = useState('');
   const [igcData, setIgcData] = useState('');
@@ -56,7 +55,7 @@ const UploadForm = ({ setShowUploadModal }) => {
     e.preventDefault();
 
     const form = new FormData();
-    form.append('user_id', user.id);
+    form.append('user_id', sessionUser.id);
     form.append('igcFile', igcFile);
     form.append('date', date);
     form.append('pilot', pilot);
@@ -75,8 +74,8 @@ const UploadForm = ({ setShowUploadModal }) => {
     const flight = await response.json();
     console.log('NEW FLIGHT', flight)
     if (!flight.errors) {
-      dispatch(setFlight(flight));
-      return  <Redirect  to={`/flight/${flight.id}`} />
+      setShowUploadModal(false);
+      return  history.push(`/flight/${flight.id}`);
     } else {
       setErrors(flight.errors);
     }

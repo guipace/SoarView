@@ -1,5 +1,6 @@
 import boto3
 import botocore
+import urllib
 from datetime import datetime
 from .config import Config
 
@@ -26,7 +27,8 @@ def upload_file_to_s3(file, bucket_name, acl="public-read"):
         print("Something Happened: ", e)
         return e
 
-    filename = f"{file.filename}-{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
+    filename_no_spaces = file.filename.replace(" ", "")
+    filename = f"{filename_no_spaces}-{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
 
     try:
         s3.upload_fileobj(
@@ -44,4 +46,4 @@ def upload_file_to_s3(file, bucket_name, acl="public-read"):
         print("Something Happened: ", e)
         return e
 
-    return f"{Config.S3_LOCATION}{file.filename}"
+    return f"{Config.S3_LOCATION}{filename}"

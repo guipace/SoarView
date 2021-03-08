@@ -15,7 +15,7 @@ export const removeFlight = () => {
 }
 
 export const getFlight = (id) => async (dispatch) => {
-  const res = await fetch(`api/flight/${id}`);
+  const res = await fetch(`/api/flight/${id}`);
 
   if (res.ok) {
     const flight = await res.json();
