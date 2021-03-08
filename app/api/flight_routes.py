@@ -12,17 +12,25 @@ flight_routes = Blueprint('flight', __name__)
 @flight_routes.route('/', methods=['POST'])
 @login_required
 def uploadFlight():
-    print('HITTING 1 ------------------------------------')
     form = FlightForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('HITTING 2 ------------------------------------')
+
     url = ''
     if request.files:
         url = upload_file_to_s3(request.files['igcFile'], Config.S3_BUCKET)
-    print('HITTING 3 ------------------------------------')
+
     if form.validate_on_submit():
         flight = Flight(
-            image_url=url,
+            user_id=form.data['user_id'],
+            igc_url=url,
+            date=form.data['date'],
+            pilot=form.data['pilot'],
+            copilot=form.data['copilot'],
+            glider_model=form.data['glider_model'],
+            glider_class=form.data['glider_class'],
+            callsign=form.data['callsign'],
+            registration=form.data['registration'],
+            notes=form.data['notes'],
         )
         db.session.add(flight)
         db.session.commit()
