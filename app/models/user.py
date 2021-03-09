@@ -39,6 +39,22 @@ class User(db.Model, UserMixin):
             "last_name": self.last_name,
             "country": self.country,
             "image_url": self.image_url,
+            "flights": [flight.id for flight in self.flights],
+            "comments": [comment.id for comment in self.comments],
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+        }
+
+    def to_dict_nested(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "country": self.country,
+            "image_url": self.image_url,
+            "flights": [flight.to_dict() for flight in self.flights],
+            "comments": [comment.to_dict() for comment in self.comments],
             "created_at": self.created_at,
             "updated_at": self.updated_at,
         }

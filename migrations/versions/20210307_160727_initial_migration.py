@@ -1,8 +1,8 @@
-"""Initial migration
+"""Initial migration.
 
-Revision ID: 1654a0c8b22a
+Revision ID: cfc3bd95770f
 Revises: 
-Create Date: 2021-03-03 14:40:31.740823
+Create Date: 2021-03-07 16:07:27.366317
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1654a0c8b22a'
+revision = 'cfc3bd95770f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -36,12 +36,13 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('igc_url', sa.Text(), nullable=False),
     sa.Column('date', sa.Date(), nullable=False),
-    sa.Column('duration', sa.Time(), nullable=False),
-    sa.Column('distance', sa.Float(), nullable=False),
-    sa.Column('location', sa.String(length=50), nullable=False),
+    sa.Column('pilot', sa.String(length=50), nullable=False),
+    sa.Column('copilot', sa.String(length=50), nullable=True),
     sa.Column('glider_model', sa.String(length=50), nullable=False),
-    sa.Column('launch_type', sa.String(length=50), nullable=False),
-    sa.Column('notes', sa.Text(), nullable=False),
+    sa.Column('glider_class', sa.String(length=50), nullable=False),
+    sa.Column('callsign', sa.String(length=50), nullable=False),
+    sa.Column('registration', sa.String(length=50), nullable=False),
+    sa.Column('notes', sa.Text(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
