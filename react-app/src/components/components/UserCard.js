@@ -11,7 +11,8 @@ function UserCard({user}) {
             <img className='h-14' src={user.image_url} alt='user' />
           </div>
           <div>
-            {`${user.first_name} ${user.last_name}`}
+            <div>{`${user.first_name} ${user.last_name}`}</div>
+            <div className='text-sm'>{user.country}</div>
           </div>
       </div>
     </Link>
