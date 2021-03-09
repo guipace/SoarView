@@ -169,6 +169,7 @@ export function DeleteModal({ showDeleteModal, setShowDeleteModal }) {
               <div className="relative px-6 pb-3 flex-auto flex justify-around">
                 <button
                   className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
+                  onClick={() => setShowDeleteModal(false)}
                 >Cancel</button>
                 <button
                 className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
