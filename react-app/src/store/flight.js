@@ -23,6 +23,39 @@ export const getFlight = (id) => async (dispatch) => {
   }
 };
 
+export const editFlight = (updatedData) => async (dispatch) => {
+  const id = updatedData.id;
+
+  const res = await fetch(`/api/flight/${id}`, {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(updatedData),
+  })
+
+  if (res.ok) {
+    const flight = await res.json();
+    dispatch(setFlight(flight));
+  } else {
+    return res.errors
+  }
+}
+
+export const deleteFlight = (id) => async (dispatch) => {
+  const res = await fetch(`/api/flight/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: null,
+  });
+
+  if (res.ok) {
+    return dispatch(removeFlight())
+  };
+};
+
 const initialState = null;
 
 const flightReducer = ( state = initialState, action ) => {

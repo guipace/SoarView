@@ -2,6 +2,9 @@ import LoginForm from './auth/LoginForm';
 import SignUpForm from './auth/SignUpForm';
 import UploadForm from './UploadForm';
 import EditForm from './EditForm';
+import { deleteFlight } from '../store/flight';
+import { useDispatch } from 'react-redux';
+import { Redirect, useHistory } from 'react-router';
 
 export function LoginModal({ showLoginModal, setShowLoginModal, setShowSignupModal, setAuthenticated }) {
   return (
@@ -108,7 +111,7 @@ export function UploadModal({ showUploadModal, setShowUploadModal }) {
   );
 }
 
-export function EditModal({ showEditModal, setShowEditModal }) {
+export function EditModal({ flight, showEditModal, setShowEditModal }) {
   return (
     showEditModal ? (
       <>
@@ -132,7 +135,7 @@ export function EditModal({ showEditModal, setShowEditModal }) {
               </div>
               {/*body*/}
               <div className="relative px-6 pb-3 flex-auto">
-                <EditForm setShowEditModal={setShowEditModal}/>
+                <EditForm flight={flight} setShowEditModal={setShowEditModal}/>
               </div>
             </div>
           </div>
@@ -143,7 +146,10 @@ export function EditModal({ showEditModal, setShowEditModal }) {
   );
 }
 
-export function DeleteModal({ showDeleteModal, setShowDeleteModal }) {
+export function DeleteModal({ flight, showDeleteModal, setShowDeleteModal }) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   return (
     showDeleteModal ? (
       <>
@@ -168,13 +174,13 @@ export function DeleteModal({ showDeleteModal, setShowDeleteModal }) {
               {/*body*/}
               <div className="relative px-6 pb-3 flex-auto flex justify-around">
                 <button
+                className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
+                onClick={() => {dispatch(deleteFlight(flight.id)); setShowDeleteModal(false); history.push('/')}}
+                >Confirm</button>
+                <button
                   className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
                   onClick={() => setShowDeleteModal(false)}
                 >Cancel</button>
-                <button
-                className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
-                onClick={() => {console.log("DELETE BUTTON")}}
-                >Confirm</button>
               </div>
             </div>
           </div>
