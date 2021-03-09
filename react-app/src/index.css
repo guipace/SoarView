@@ -24,9 +24,9 @@
     input {
         @apply px-2 py-1
     }
-    a:hover {
+    /* a:hover {
         @apply underline
-    }
+    } */
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans&family=Hind&family=Noto+Sans&display=swap');
