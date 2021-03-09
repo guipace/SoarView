@@ -13,7 +13,7 @@ function CommentSection ({ flight }) {
       <form onSubmit={onComment} className=''>
         <div className='flex items-center'>
           <input
-            className='flex-grow h-10 mr-2'
+            className='flex-grow h-10 mr-2 border'
             type='text'
             name='comment'
             value={comment}
