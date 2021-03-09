@@ -87,7 +87,7 @@ export function UploadModal({ showUploadModal, setShowUploadModal }) {
               {/*header*/}
               <div className="flex items-center justify-between p-5 border-b border-solid border-gray-300 rounded-t">
                 <img className='max-h-10	mr-2' src='https://soarview.s3.amazonaws.com/logo_no_text.png' alt='logo' />
-                <h2 className="font-fira">Upload a Flight</h2>
+                <h2 className="font-fira">Upload a flight</h2>
                 <button
                   className="p-1 ml-auto bg-transparent border-0 text-black opacity-30 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                   onClick={() => setShowUploadModal(false)}
@@ -122,7 +122,7 @@ export function EditModal({ showEditModal, setShowEditModal }) {
               {/*header*/}
               <div className="flex items-center justify-between p-5 border-b border-solid border-gray-300 rounded-t">
                 <img className='max-h-10	mr-2' src='https://soarview.s3.amazonaws.com/logo_no_text.png' alt='logo' />
-                <h2 className="font-fira">Edit Your Flight</h2>
+                <h2 className="font-fira">Edit your flight</h2>
                 <button
                   className="p-1 ml-auto bg-transparent border-0 text-black opacity-30 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                   onClick={() => setShowEditModal(false)}
@@ -157,7 +157,7 @@ export function DeleteModal({ showDeleteModal, setShowDeleteModal }) {
               {/*header*/}
               <div className="flex items-center justify-between p-5 border-b border-solid border-gray-300 rounded-t">
                 <img className='max-h-10	mr-2' src='https://soarview.s3.amazonaws.com/logo_no_text.png' alt='logo' />
-                <h2 className="font-fira">Confirm Flight Deletion</h2>
+                <h2 className="font-fira">Confirm deletion</h2>
                 <button
                   className="p-1 ml-auto bg-transparent border-0 text-black opacity-30 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                   onClick={() => setShowDeleteModal(false)}
@@ -173,6 +173,7 @@ export function DeleteModal({ showDeleteModal, setShowDeleteModal }) {
                 >Cancel</button>
                 <button
                 className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
+                onClick={() => {console.log("DELETE BUTTON")}}
                 >Confirm</button>
               </div>
             </div>
