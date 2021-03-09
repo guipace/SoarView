@@ -47,7 +47,7 @@ function FlightPage() {
   },[igcData])
 
   return (
-    <div className='flex-1 flex flex-col md:flex-row'>
+    <div className='mt-20 flex-1 flex flex-col md:flex-row'>
       <MapWrapper features={features} />
       <FlightSidebar sessionUser={sessionUser} flight={flight}/>
     </div>
