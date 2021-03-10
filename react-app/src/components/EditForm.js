@@ -27,17 +27,9 @@ const EditForm = ({ flight, setShowEditModal }) => {
       notes,
     }
 
-    let response = dispatch(editFlight(updatedData));
+    dispatch(editFlight(updatedData));
 
-    // const flight = await response.json();
-    // // console.log('NEW FLIGHT', flight)
-    // if (!flight.errors) {
-      //   setShowEditModal(false);
-      //   return  history.push(`/flight/${flight.id}`);
-      // } else {
-        //   setErrors(flight.errors);
-        // }
-        setShowEditModal(false);
+    setShowEditModal(false);
   };
 
   return (

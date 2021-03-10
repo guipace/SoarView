@@ -31,9 +31,12 @@ def uploadFlight():
             registration=form.data['registration'],
             notes=form.data['notes'],
         )
+
         db.session.add(flight)
         db.session.commit()
+
         return flight.to_dict()
+
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
@@ -47,9 +50,6 @@ def flight(id):
 @flight_routes.route('/<int:id>', methods=['PATCH'])
 @login_required
 def edit_flight(id):
-    form = FlightForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-
     data = json.loads(request.data)
 
     pilot = data['pilot']
@@ -61,32 +61,16 @@ def edit_flight(id):
     notes = data['notes']
 
     flight = Flight.query.get(id)
+    flight.pilot = pilot
+    flight.copilot = copilot
+    flight.glider_model = glider_model
+    flight.glider_class = glider_class
+    flight.callsign = callsign
+    flight.registration = registration
+    flight.notes = notes
 
-    if form.validate_on_submit():
-        flight.pilot = pilot
-        flight.copilot = copilot
-        flight.glider_model = glider_model
-        flight.glider_class = glider_class
-        flight.callsign = callsign
-        flight.registration = registration
-        flight.notes = notes
-
-        # flight = Flight(
-        #     user_id=form.data['user_id'],
-        #     igc_url=url,
-        #     date=form.data['date'],
-        #     pilot=form.data['pilot'],
-        #     copilot=form.data['copilot'],
-        #     glider_model=form.data['glider_model'],
-        #     glider_class=form.data['glider_class'],
-        #     callsign=form.data['callsign'],
-        #     registration=form.data['registration'],
-        #     notes=form.data['notes'],
-        # )
-
-        db.session.commit()
-        return flight.to_dict_nested()
-    return {'errors': validation_errors_to_error_messages(form.errors)}
+    db.session.commit()
+    return flight.to_dict_nested()
 
 
 @flight_routes.route('/<int:id>', methods=['DELETE'])

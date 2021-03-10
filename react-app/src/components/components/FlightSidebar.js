@@ -62,7 +62,7 @@ function FlightSidebar({flight, sessionUser}) {
           </table>
         </div>
         <div className='mx-3 my-2 py-2'>
-          <CommentSection flight={flight} />
+          <CommentSection flight={flight} sessionUser={sessionUser} />
         </div>
         {flight.user_id === sessionUser.id &&
         <div className='mx-3 my-2 py-2'>

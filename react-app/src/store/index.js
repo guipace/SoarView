@@ -3,13 +3,13 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import userReducer from './user';
 import flightReducer from './flight'
-// import commentReducer from './comments';
+import commentReducer from './comments';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
     user: userReducer,
     flight: flightReducer,
-    // comments:commentReducer,
+    comments:commentReducer,
 })
 
 let enhancer;

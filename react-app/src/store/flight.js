@@ -56,6 +56,20 @@ export const deleteFlight = (id) => async (dispatch) => {
   };
 };
 
+// export const postComment = (formData) => async (dispatch) => {
+//   const res = await fetch(`/api/comment/`, {
+//     method: "POST",
+//     body: formData,
+//   })
+
+//   if (res.ok) {
+//     const flight = await res.json();
+//     dispatch(setFlight(flight));
+//   } else {
+//     return res.errors
+//   }
+// }
+
 const initialState = null;
 
 const flightReducer = ( state = initialState, action ) => {
