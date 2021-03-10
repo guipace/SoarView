@@ -4,7 +4,7 @@ import { editFlight } from '../store/flight';
 
 const EditForm = ({ flight, setShowEditModal }) => {
   const dispatch = useDispatch();
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
   const [pilot, setPilot] = useState(flight.pilot);
   const [copilot, setCopilot] = useState(flight.copilot);
   const [glider_model, setGliderModel] = useState(flight.glider_model);
@@ -34,9 +34,9 @@ const EditForm = ({ flight, setShowEditModal }) => {
 
   return (
     <form onSubmit={onEdit} className='flex flex-col font-noto'>
-      <ul id="login-errors" className="block my-2 text-center text-red-600 font-bold">
+      {/* <ul id="login-errors" className="block my-2 text-center text-red-600 font-bold">
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
+      </ul> */}
       <div className='flex pb-2'>
         <label className='w-1/4'>Pilot Name</label>
         <input

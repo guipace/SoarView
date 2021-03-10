@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postComment } from '../../store/comments';
+import CommentCard from './CommentCard';
 
 function CommentSection ({ flight, sessionUser }) {
   const dispatch = useDispatch();
@@ -40,8 +41,7 @@ function CommentSection ({ flight, sessionUser }) {
         {comments.map((comment) => {
           return (
             <div key={comment.id}>
-
-              <p>{comment.comment}</p>
+              <CommentCard comment={comment} />
             </div>
           )
         })}
