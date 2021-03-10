@@ -18,38 +18,36 @@ export const removeComments = () => {
 
 export const getComments = (flightId) => async (dispatch) => {
   const res = await fetch(`/api/comments/${flightId}`);
-  console.log("THUNK", res.ok)
+
   if (res.ok) {
     const comments = await res.json();
-    console.log("THUNK GET COMMENTS", comments)
     dispatch(setComments(comments));
   }
 };
 
-// export const deleteFlight = (id) => async (dispatch) => {
-//   const res = await fetch(`/api/flight/${id}`, {
-//     method: 'DELETE',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: null,
-//   });
+export const deleteComment = (id) => async (dispatch) => {
+  const res = await fetch(`/api/comments/${id}`, {
+    method: "DELETE",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  });
 
-//   if (res.ok) {
-//     return dispatch(removeFlight())
-//   };
-// };
+  if (res.ok) {
+    const comments = await res.json();
+    return dispatch(setComments(comments))
+  };
+};
 
 export const postComment = (formData) => async (dispatch) => {
-  const res = await fetch(`/api/comment/`, {
+  const res = await fetch(`/api/comments/`, {
     method: "POST",
     body: formData,
   })
 
   if (res.ok) {
-    const flight = await res.json();
-    console.log("THUNK FLIGHT", flight)
-    dispatch(setFlight(flight));
+    const comments = await res.json();
+    dispatch(setComments(comments));
   } else {
     return res.errors
   }

@@ -49,7 +49,7 @@ const UploadForm = ({ setShowUploadModal }) => {
       igcData.callsign && setCallsign(igcData.callsign);
       igcData.registration && setRegistration(igcData.registration);
     }
-  }, [igcData]);
+  }, [igcData, sessionUser.first_name, sessionUser.last_name]);
 
   const onUpload = async (e) => {
     e.preventDefault();
