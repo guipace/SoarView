@@ -1,4 +1,4 @@
-import setFlight from './flight';
+import { setFlight } from './flight';
 
 const SET_COMMENTS = 'comments/setComments';
 const REMOVE_COMMENTS = 'flight/removeComments';
@@ -18,9 +18,10 @@ export const removeComments = () => {
 
 export const getComments = (flightId) => async (dispatch) => {
   const res = await fetch(`/api/comments/${flightId}`);
-
+  console.log("THUNK", res.ok)
   if (res.ok) {
     const comments = await res.json();
+    console.log("THUNK GET COMMENTS", comments)
     dispatch(setComments(comments));
   }
 };
@@ -47,6 +48,7 @@ export const postComment = (formData) => async (dispatch) => {
 
   if (res.ok) {
     const flight = await res.json();
+    console.log("THUNK FLIGHT", flight)
     dispatch(setFlight(flight));
   } else {
     return res.errors
