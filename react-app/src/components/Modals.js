@@ -4,7 +4,7 @@ import UploadForm from './UploadForm';
 import EditForm from './EditForm';
 import { deleteFlight } from '../store/flight';
 import { useDispatch } from 'react-redux';
-import { Redirect, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 
 export function LoginModal({ showLoginModal, setShowLoginModal, setShowSignupModal, setAuthenticated }) {
   return (

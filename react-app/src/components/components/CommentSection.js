@@ -18,7 +18,7 @@ function CommentSection ({ flight, sessionUser }) {
     dispatch(postComment(form))
   }
 
-  return (
+  return ( comments &&
     <div>
       <form onSubmit={onComment} className=''>
         <div className='flex items-center'>
@@ -37,9 +37,9 @@ function CommentSection ({ flight, sessionUser }) {
         </div>
       </form>
       <div>
-        {flight.comments.map((comment) => {
+        {comments.map((comment) => {
           return (
-            <div>
+            <div key={comment.id}>
 
               <p>{comment.comment}</p>
             </div>
