@@ -49,7 +49,7 @@ def flight(id):
 
 @flight_routes.route('/recent')
 @login_required
-def recent_flights(id):
+def recent_flights():
     flights = Flight.query.order_by(Flight.date.desc()).limit(20)
     return jsonify([flight.to_dict_nested() for flight in flights])
 

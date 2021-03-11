@@ -1,10 +1,18 @@
 const SET_FLIGHT = 'flight/setFlight';
+const SET_RECENT_FLIGHTS = 'flight/setRecentFlights';
 const REMOVE_FLIGHT = 'flight/removeFlight';
 
 export const setFlight = (flight) => {
   return {
     type: SET_FLIGHT,
     payload: flight,
+  }
+}
+
+export const setRecentFlights = (flights) => {
+  return {
+    type: SET_RECENT_FLIGHTS,
+    payload: flights,
   }
 }
 
@@ -22,6 +30,15 @@ export const getFlight = (id) => async (dispatch) => {
     dispatch(setFlight(flight));
   }
 };
+
+export const getRecentFlights = () => async (dispatch) => {
+  const res = await fetch(`/api/flight/recent`);
+
+  if (res.ok) {
+    const flights = await res.json();
+    dispatch(setRecentFlights(flights));
+  }
+}
 
 export const editFlight = (updatedData) => async (dispatch) => {
   const id = updatedData.id;
@@ -56,14 +73,18 @@ export const deleteFlight = (id) => async (dispatch) => {
   };
 };
 
-const initialState = null;
+const initialState = { singleFlight: null, recentFlights: null};
 
 const flightReducer = ( state = initialState, action ) => {
   let newState;
   switch(action.type) {
     case SET_FLIGHT:
       newState = Object.assign({}, state);
-      newState = action.payload;
+      newState.singleFlight = action.payload;
+      return newState;
+    case SET_RECENT_FLIGHTS:
+      newState = Object.assign({}, state);
+      newState.recentFlights = action.payload;
       return newState;
     case REMOVE_FLIGHT:
       newState = Object.assign({}, state);
