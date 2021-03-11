@@ -13,7 +13,7 @@ function FlightPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
-  const flight = useSelector(state => state.flight);
+  const flight = useSelector(state => state.flight.singleFlight);
   const [ igcData, setIgcData ] = useState();
   const [ features, setFeatures ] = useState([])
 
