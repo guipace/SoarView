@@ -1,5 +1,3 @@
-import { setFlight } from './flight';
-
 const SET_COMMENTS = 'comments/setComments';
 const REMOVE_COMMENTS = 'flight/removeComments';
 
