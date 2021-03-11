@@ -23,3 +23,12 @@ class Comment(db.Model):
             "comment": self.comment,
             "created_at": self.created_at,
         }
+
+    def to_dict_nested(self):
+        return {
+            "id": self.id,
+            "user": self.user.to_dict(),
+            "flight": self.flights.to_dict(),
+            "comment": self.comment,
+            "created_at": self.created_at,
+        }

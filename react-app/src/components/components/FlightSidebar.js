@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import UserCard from './UserCard';
 import { EditModal, DeleteModal } from '../Modals';
+import CommentSection from './CommentSection';
 
 function FlightSidebar({flight, sessionUser}) {
   const [showEditModal, setShowEditModal] = useState(false);
@@ -9,8 +10,8 @@ function FlightSidebar({flight, sessionUser}) {
 
   return ( flight && sessionUser &&
     <>
-      <EditModal showEditModal={showEditModal} setShowEditModal={setShowEditModal} />
-      <DeleteModal showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} />
+      <EditModal flight={flight} showEditModal={showEditModal} setShowEditModal={setShowEditModal} />
+      <DeleteModal flight={flight} showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} />
       <div className='font-noto w-full md:w-3/12 md:order-1 overflow-y-auto flex flex-col divide-y-2'>
         <div className='mx-3 my-2'>
           <UserCard user={flight.user}/>
@@ -60,7 +61,9 @@ function FlightSidebar({flight, sessionUser}) {
             </tbody>
           </table>
         </div>
-        <div className='mx-3 my-2 py-2'>PLACEHOLDER FOR COMMENT SECTION</div>
+        <div className='mx-3 my-2 py-2'>
+          <CommentSection flight={flight} sessionUser={sessionUser} />
+        </div>
         {flight.user_id === sessionUser.id &&
         <div className='mx-3 my-2 py-2'>
           <h4 className='text-center mb-2'>Upload Management</h4>

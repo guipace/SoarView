@@ -42,14 +42,14 @@ const UploadForm = ({ setShowUploadModal }) => {
     //Populate form with IGC file data
     if (igcData) {
       igcData.date && setDate(igcData.date);
-      igcData.pilot && setPilot(igcData.pilot);
+      igcData.pilot ? setPilot(igcData.pilot) : setPilot(`${sessionUser.first_name} ${sessionUser.last_name}`);
       igcData.copilot && setCopilot(igcData.copilot);
       igcData.gliderType && setGliderModel(igcData.gliderType);
       igcData.competitionClass && setGliderClass(igcData.competitionClass);
       igcData.callsign && setCallsign(igcData.callsign);
       igcData.registration && setRegistration(igcData.registration);
     }
-  }, [igcData]);
+  }, [igcData, sessionUser.first_name, sessionUser.last_name]);
 
   const onUpload = async (e) => {
     e.preventDefault();
@@ -72,7 +72,7 @@ const UploadForm = ({ setShowUploadModal }) => {
     });
 
     const flight = await response.json();
-    console.log('NEW FLIGHT', flight)
+
     if (!flight.errors) {
       setShowUploadModal(false);
       return  history.push(`/flight/${flight.id}`);

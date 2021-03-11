@@ -2,6 +2,9 @@ import LoginForm from './auth/LoginForm';
 import SignUpForm from './auth/SignUpForm';
 import UploadForm from './UploadForm';
 import EditForm from './EditForm';
+import { deleteFlight } from '../store/flight';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 
 export function LoginModal({ showLoginModal, setShowLoginModal, setShowSignupModal, setAuthenticated }) {
   return (
@@ -87,7 +90,7 @@ export function UploadModal({ showUploadModal, setShowUploadModal }) {
               {/*header*/}
               <div className="flex items-center justify-between p-5 border-b border-solid border-gray-300 rounded-t">
                 <img className='max-h-10	mr-2' src='https://soarview.s3.amazonaws.com/logo_no_text.png' alt='logo' />
-                <h2 className="font-fira">Upload a Flight</h2>
+                <h2 className="font-fira">Upload a flight</h2>
                 <button
                   className="p-1 ml-auto bg-transparent border-0 text-black opacity-30 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                   onClick={() => setShowUploadModal(false)}
@@ -108,7 +111,7 @@ export function UploadModal({ showUploadModal, setShowUploadModal }) {
   );
 }
 
-export function EditModal({ showEditModal, setShowEditModal }) {
+export function EditModal({ flight, showEditModal, setShowEditModal }) {
   return (
     showEditModal ? (
       <>
@@ -122,7 +125,7 @@ export function EditModal({ showEditModal, setShowEditModal }) {
               {/*header*/}
               <div className="flex items-center justify-between p-5 border-b border-solid border-gray-300 rounded-t">
                 <img className='max-h-10	mr-2' src='https://soarview.s3.amazonaws.com/logo_no_text.png' alt='logo' />
-                <h2 className="font-fira">Edit Your Flight</h2>
+                <h2 className="font-fira">Edit your flight</h2>
                 <button
                   className="p-1 ml-auto bg-transparent border-0 text-black opacity-30 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                   onClick={() => setShowEditModal(false)}
@@ -132,7 +135,7 @@ export function EditModal({ showEditModal, setShowEditModal }) {
               </div>
               {/*body*/}
               <div className="relative px-6 pb-3 flex-auto">
-                <EditForm setShowEditModal={setShowEditModal}/>
+                <EditForm flight={flight} setShowEditModal={setShowEditModal}/>
               </div>
             </div>
           </div>
@@ -143,7 +146,10 @@ export function EditModal({ showEditModal, setShowEditModal }) {
   );
 }
 
-export function DeleteModal({ showDeleteModal, setShowDeleteModal }) {
+export function DeleteModal({ flight, showDeleteModal, setShowDeleteModal }) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   return (
     showDeleteModal ? (
       <>
@@ -157,7 +163,7 @@ export function DeleteModal({ showDeleteModal, setShowDeleteModal }) {
               {/*header*/}
               <div className="flex items-center justify-between p-5 border-b border-solid border-gray-300 rounded-t">
                 <img className='max-h-10	mr-2' src='https://soarview.s3.amazonaws.com/logo_no_text.png' alt='logo' />
-                <h2 className="font-fira">Confirm Flight Deletion</h2>
+                <h2 className="font-fira">Confirm deletion</h2>
                 <button
                   className="p-1 ml-auto bg-transparent border-0 text-black opacity-30 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                   onClick={() => setShowDeleteModal(false)}
@@ -168,12 +174,13 @@ export function DeleteModal({ showDeleteModal, setShowDeleteModal }) {
               {/*body*/}
               <div className="relative px-6 pb-3 flex-auto flex justify-around">
                 <button
+                className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
+                onClick={() => {dispatch(deleteFlight(flight.id)); setShowDeleteModal(false); history.push('/')}}
+                >Confirm</button>
+                <button
                   className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
                   onClick={() => setShowDeleteModal(false)}
                 >Cancel</button>
-                <button
-                className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
-                >Confirm</button>
               </div>
             </div>
           </div>

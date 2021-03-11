@@ -1,111 +1,42 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import IGCParser from 'igc-parser'
-import { useHistory } from "react-router";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { editFlight } from '../store/flight';
 
-const EditForm = ({ setShowEditModal }) => {
-  const history = useHistory();
-  const sessionUser = useSelector(state => state.session.user);
-  const [errors, setErrors] = useState([]);
-  const [igcFile, setIgcFile] = useState('');
-  const [igcData, setIgcData] = useState('');
-  const [date, setDate] = useState('');
-  const [pilot, setPilot] = useState('');
-  const [copilot, setCopilot] = useState('');
-  const [glider_model, setGliderModel] = useState('');
-  const [glider_class, setGliderClass] = useState('');
-  const [callsign, setCallsign] = useState('');
-  const [registration, setRegistration] = useState('');
-  const [notes, setNotes] = useState('');
+const EditForm = ({ flight, setShowEditModal }) => {
+  const dispatch = useDispatch();
+  // const [errors, setErrors] = useState([]);
+  const [pilot, setPilot] = useState(flight.pilot);
+  const [copilot, setCopilot] = useState(flight.copilot);
+  const [glider_model, setGliderModel] = useState(flight.glider_model);
+  const [glider_class, setGliderClass] = useState(flight.glider_class);
+  const [callsign, setCallsign] = useState(flight.callsign);
+  const [registration, setRegistration] = useState(flight.registration);
+  const [notes, setNotes] = useState(flight.notes);
 
-  useEffect(() => {
-    //Parse IGC file
-    if (igcFile) {
-      let fileReader = new FileReader();
-      fileReader.readAsText(igcFile);
-      fileReader.onload = function() {
-        try {
-          let igcParsedData = IGCParser.parse(fileReader.result);
-          console.log(igcParsedData);
-          setIgcData(igcParsedData);
-        } catch (err) {
-          setErrors(err);
-        }
-      };
-      fileReader.onerror = function() {
-        setErrors(fileReader.error);
-      };
-    }
-  }, [igcFile])
-
-  useEffect(() => {
-    //Populate form with IGC file data
-    if (igcData) {
-      igcData.date && setDate(igcData.date);
-      igcData.pilot && setPilot(igcData.pilot);
-      igcData.copilot && setCopilot(igcData.copilot);
-      igcData.gliderType && setGliderModel(igcData.gliderType);
-      igcData.competitionClass && setGliderClass(igcData.competitionClass);
-      igcData.callsign && setCallsign(igcData.callsign);
-      igcData.registration && setRegistration(igcData.registration);
-    }
-  }, [igcData]);
-
-  const onEdit = async (e) => {
+  const onEdit = (e) => {
     e.preventDefault();
 
-    const form = new FormData();
-    form.append('user_id', sessionUser.id);
-    form.append('igcFile', igcFile);
-    form.append('date', date);
-    form.append('pilot', pilot);
-    form.append('copilot', copilot);
-    form.append('glider_model', glider_model);
-    form.append('glider_class', glider_class);
-    form.append('callsign', callsign);
-    form.append('registration', registration);
-    form.append('notes', notes);
-
-    const response = await fetch("/api/flight/", {
-      method: "PUT",
-      body: form,
-    });
-
-    const flight = await response.json();
-    // console.log('NEW FLIGHT', flight)
-    if (!flight.errors) {
-      setShowEditModal(false);
-      return  history.push(`/flight/${flight.id}`);
-    } else {
-      setErrors(flight.errors);
+    const updatedData = {
+      id: flight.id,
+      pilot,
+      copilot,
+      glider_model,
+      glider_class,
+      callsign,
+      registration,
+      notes,
     }
 
+    dispatch(editFlight(updatedData));
 
-    // // SOLUTION 1 - FROM URL
-    // let igcText = await fetch('https://soarview.s3.amazonaws.com/12sv1wz1.igc').then(res => res.blob()).then(blob => blob.text())
-
-    // try {
-    //   let igcData = IGCParser.parse(igcText);
-    //   console.log(igcData);
-    // } catch (err) {
-    //   console.error(err);
-    // }
+    setShowEditModal(false);
   };
 
   return (
     <form onSubmit={onEdit} className='flex flex-col font-noto'>
-      <ul id="login-errors" className="block my-2 text-center text-red-600 font-bold">
+      {/* <ul id="login-errors" className="block my-2 text-center text-red-600 font-bold">
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
-      <div className='flex pb-2'>
-        <label className='w-1/4'>IGC File</label>
-        <input
-          className='flex-grow ml-2'
-          type="file"
-          name="igcFile"
-          onChange={e => setIgcFile(e.target.files[0])}
-        ></input>
-      </div>
+      </ul> */}
       <div className='flex pb-2'>
         <label className='w-1/4'>Pilot Name</label>
         <input
@@ -182,9 +113,15 @@ const EditForm = ({ setShowEditModal }) => {
           value={notes}
         ></textarea>
       </div>
-      <button
-        className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
-        type="submit">Edit</button>
+      <div className="relative px-6 pb-3 flex-auto flex justify-around">
+        <button
+          className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
+          type="submit">Edit</button>
+        <button
+          className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
+          onClick={() => setShowEditModal(false)}
+        >Cancel</button>
+      </div>
     </form>
   );
 };

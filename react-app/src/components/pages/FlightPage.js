@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFlight } from '../../store/flight';
+import { getComments } from '../../store/comments';
 import MapWrapper from '../MapWrapper';
 import FlightSidebar from '../components/FlightSidebar';
 
@@ -20,6 +21,7 @@ function FlightPage() {
   useEffect(() => {
     //dispatch get flight from db and into redux
     dispatch(getFlight(id));
+    dispatch(getComments(id));
   }, [dispatch, id])
 
   useEffect(() => {
