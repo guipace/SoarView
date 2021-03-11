@@ -47,6 +47,13 @@ def flight(id):
     return flight.to_dict_nested()
 
 
+@flight_routes.route('/recent')
+@login_required
+def recent_flights(id):
+    flights = Flight.query.order_by(Flight.date.desc()).limit(20)
+    return jsonify([flight.to_dict_nested() for flight in flights])
+
+
 @flight_routes.route('/<int:id>', methods=['PATCH'])
 @login_required
 def edit_flight(id):
