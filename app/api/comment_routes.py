@@ -37,13 +37,14 @@ def post_comment():
         return jsonify([comment.to_dict_nested() for comment in comments])
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
-    @comment_routes.route('/<int:id>', methods=['DELETE'], strict_slashes=False)
-    @login_required
-    def delete_comment(id):
-        print('BACKEND ===================')
-        comment = Comment.query.get(id)
-        flight_id = comment.flight_id
-        db.session.delete(comment)
-        db.session.commit()
-        comments = Comment.query.filter(Comment.flight_id == flight_id).all()
-        return jsonify([comment.to_dict_nested() for comment in comments])
+
+@comment_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_comment(id):
+    print('BACKEND ===================')
+    comment = Comment.query.get(id)
+    flight_id = comment.flight_id
+    db.session.delete(comment)
+    db.session.commit()
+    comments = Comment.query.filter(Comment.flight_id == flight_id).all()
+    return jsonify([comment.to_dict_nested() for comment in comments])
