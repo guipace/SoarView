@@ -15,13 +15,12 @@ export const removeUser = () => {
 }
 
 export const getUser = (id) => async (dispatch) => {
-  const res = await fetch(`/api/events/${id}`);
+  const res = await fetch(`/api/user/${id}`);
 
   if(res.ok) {
     const data = await res.json()
     dispatch(setUser(data));
   }
-
 };
 
 const initialState = null;

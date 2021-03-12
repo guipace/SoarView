@@ -5,7 +5,6 @@ import { getFlight } from '../../store/flight';
 import { getComments } from '../../store/comments';
 import MapWrapper from '../MapWrapper';
 import FlightSidebar from '../components/FlightSidebar';
-
 import IGC from 'ol/format/IGC';
 // import Feature from 'ol/Feature';
 

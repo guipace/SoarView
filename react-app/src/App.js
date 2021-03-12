@@ -5,8 +5,7 @@ import { authenticate } from "./services/auth";
 import { setUser } from "./store/session";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import UsersList from "./components/UsersList";
-import User from "./components/User";
+import UserPage from "./components/pages/UserPage";
 import LandingPage from "./components/pages/LandingPage";
 import Footer from "./components/Footer";
 import FlightPage from './components/pages/FlightPage';
@@ -36,11 +35,8 @@ function App() {
     <div className='flex flex-col h-screen'>
       {authenticated && <NavBar setAuthenticated={setAuthenticated} />}
       <Switch>
-        <ProtectedRoute path="/user" exact={true} authenticated={authenticated}>
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path={`/user/:userId(\\d+)`} exact={true} authenticated={authenticated}>
-          <User />
+        <ProtectedRoute path={`/user/:id(\\d+)`} exact={true} authenticated={authenticated}>
+          <UserPage />
         </ProtectedRoute>
         <ProtectedRoute path={`/flight/:id(\\d+)`} exact={true} authenticated={authenticated}>
           <FlightPage />
