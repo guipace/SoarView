@@ -19,7 +19,6 @@ function FlightPage() {
 
 
   useEffect(() => {
-    //dispatch get flight from db and into redux
     dispatch(getFlight(id));
     dispatch(getComments(id));
   }, [dispatch, id])

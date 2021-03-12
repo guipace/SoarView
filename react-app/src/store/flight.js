@@ -1,6 +1,8 @@
 const SET_FLIGHT = 'flight/setFlight';
 const SET_RECENT_FLIGHTS = 'flight/setRecentFlights';
+const SET_SEARCH_FLIGHTS = 'flight/setSearchFlights';
 const REMOVE_FLIGHT = 'flight/removeFlight';
+const REMOVE_SEARCH_FLIGHTS = 'flight/removeSearchFlights';
 
 export const setFlight = (flight) => {
   return {
@@ -16,9 +18,22 @@ export const setRecentFlights = (flights) => {
   }
 }
 
+export const setSearchFlights = (flights) => {
+  return {
+    type: SET_SEARCH_FLIGHTS,
+    payload: flights,
+  }
+}
+
 export const removeFlight = () => {
   return {
     type: REMOVE_FLIGHT,
+  }
+}
+
+export const removeSearchFlights = () => {
+  return {
+    type: REMOVE_SEARCH_FLIGHTS,
   }
 }
 
@@ -73,7 +88,22 @@ export const deleteFlight = (id) => async (dispatch) => {
   };
 };
 
-const initialState = { singleFlight: null, recentFlights: null};
+export const getSearchFlights = (start_date, end_date) => async (dispatch) => {
+  const res = await fetch('/api/flight/search', {
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({start_date, end_date})
+  })
+
+  if(res.ok){
+    const flights = await res.json()
+    dispatch(setSearchFlights(flights))
+  }
+}
+
+const initialState = { singleFlight: null, recentFlights: null, searchFlights: null};
 
 const flightReducer = ( state = initialState, action ) => {
   let newState;
@@ -86,9 +116,17 @@ const flightReducer = ( state = initialState, action ) => {
       newState = Object.assign({}, state);
       newState.recentFlights = action.payload;
       return newState;
+    case SET_SEARCH_FLIGHTS:
+      newState = Object.assign({}, state);
+      newState.searchFlights = action.payload;
+      return newState;
     case REMOVE_FLIGHT:
       newState = Object.assign({}, state);
-      newState = null;
+      newState.singleFlight = null;
+      return newState;
+    case REMOVE_SEARCH_FLIGHTS:
+      newState = Object.assign({}, state);
+      newState.searchFlights = null;
       return newState;
     default:
       return state;
