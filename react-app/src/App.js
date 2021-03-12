@@ -10,6 +10,7 @@ import User from "./components/User";
 import LandingPage from "./components/pages/LandingPage";
 import Footer from "./components/Footer";
 import FlightPage from './components/pages/FlightPage';
+import HomePage from './components/pages/HomePage';
 
 function App() {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ function App() {
           <FlightPage />
         </ProtectedRoute>
         <Route path="/" exact={true} authenticated={authenticated}>
-          {authenticated ? <div className='flex-1'>PLACEHOLDER FOR HOME PAGE COMPONENT</div> : <LandingPage setAuthenticated={setAuthenticated}/>}
+          {authenticated ? <HomePage /> : <LandingPage />}
         </Route>
       </Switch>
       {authenticated && <Footer />}
