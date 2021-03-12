@@ -54,6 +54,21 @@ def recent_flights():
     return jsonify([flight.to_dict_nested() for flight in flights])
 
 
+@flight_routes.route('/search', methods=['POST'])
+@login_required
+def search_flights():
+    data = json.loads(request.data)
+
+    start_date = data['start_date']
+    end_date = data['end_date']
+
+    flights = Flight.query.filter(
+        Flight.date >= start_date).filter(Flight.date <= end_date).\
+        order_by(Flight.date.desc()).limit(20)
+
+    return jsonify([flight.to_dict_nested() for flight in flights])
+
+
 @flight_routes.route('/<int:id>', methods=['PATCH'])
 @login_required
 def edit_flight(id):

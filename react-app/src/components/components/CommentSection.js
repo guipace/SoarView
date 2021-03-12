@@ -11,12 +11,13 @@ function CommentSection ({ flight, sessionUser }) {
   const onComment = (e) => {
     e.preventDefault();
 
-    const form = new FormData()
-    form.append('user_id', sessionUser.id)
-    form.append('flight_id', flight.id)
-    form.append('comment', comment)
+    const form = new FormData();
+    form.append('user_id', sessionUser.id);
+    form.append('flight_id', flight.id);
+    form.append('comment', comment);
 
-    dispatch(postComment(form))
+    dispatch(postComment(form));
+    setComment('');
   }
 
   return ( comments &&
