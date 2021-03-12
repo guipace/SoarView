@@ -12,14 +12,14 @@ const Footer = () => {
         <div className='flex justify-around w-full bg-primary bottom-0 py-2'>
           <div>
             <h5>About the Developer</h5>
-            <div className='flex justify-around items-center bg-background bg-opacity-80 h-11 p-1 space-x-1 rounded'>
+            <div className='flex justify-around items-center bg-background bg-opacity-80 h-11 p-1 space-x-1 rounded text-black text-opacity-80'>
               <a href='https://github.com/guipace'>
                 <FontAwesomeIcon className='text-2xl transform hover:scale-110' icon={faGithub}/>
               </a>
               <a href='https://www.linkedin.com/in/guilhermepace/'>
                 <FontAwesomeIcon className='text-2xl transform hover:scale-110' icon={faLinkedin}/>
               </a>
-              <a href=''>
+              <a href='https://angel.co/u/guilherme-pace'>
                 <FontAwesomeIcon className='text-2xl transform hover:scale-110' icon={faAngellist}/>
               </a>
               <a href='mailto:pace.gui@gmail.com'>
