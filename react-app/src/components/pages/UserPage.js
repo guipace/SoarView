@@ -23,7 +23,7 @@ function UserPage() {
             <h2>{`${user.first_name} ${user.last_name}`}</h2>
             <p>{`Joined: ${user.created_at.split(' ').slice(1,4).join(' ')}`}</p>
             <p className='flex-1'>{user.country}</p>
-            <h3>{`Logged flights: ${user.flights.length}`}</h3>
+            <h3>{`Total flights: ${user.flights.length}`}</h3>
             {sessionUser.id === user.id &&
             <button
             className="bg-accent mt-3 w-20 text-background font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none mx-1"

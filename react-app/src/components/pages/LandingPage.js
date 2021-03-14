@@ -34,7 +34,7 @@ function LandingPage({setAuthenticated}) {
             </button>
           </div>
         </div>
-        <div>PLACEHOLDER FOR ABOUT THE DEVELOPER & TECHNOLOGIES</div>
+        {/* <div>PLACEHOLDER FOR ABOUT THE DEVELOPER & TECHNOLOGIES</div> */}
       </div>
     </>
   );

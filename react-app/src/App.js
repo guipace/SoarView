@@ -42,7 +42,7 @@ function App() {
           <FlightPage />
         </ProtectedRoute>
         <Route path="/" exact={true} authenticated={authenticated}>
-          {authenticated ? <HomePage /> : <LandingPage />}
+          {authenticated ? <HomePage /> : <LandingPage setAuthenticated={setAuthenticated} />}
         </Route>
       </Switch>
       {authenticated && <Footer />}
