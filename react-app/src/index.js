@@ -8,6 +8,8 @@ import configureStore from './store';
 
 const store = configureStore();
 
+export const bingApiKey =  process.env.REACT_APP_BING_MAPS_KEY
+
 if (process.env.NODE_ENV !== 'production') {
   window.store = store;
 }
