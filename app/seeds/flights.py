@@ -2,9 +2,19 @@ from app.models import db, Flight
 
 
 def seed_flights():
-    
-    flight1 = Flight(
 
+    flight1 = Flight(
+        id=1,
+        user_id=3,
+        igc_url='',
+        date='',
+        pilot='',
+        copilot='',
+        glider_model='',
+        glider_class='',
+        callsign='',
+        registration='',
+        notes=''
     )
     db.session.add(flight1)
 
