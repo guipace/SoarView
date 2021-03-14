@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-function FlightCard({ flight }) {
+function FlightCard({ flight, user }) {
 
   return (
     <Link to={`/flight/${flight.id}`}>
@@ -12,7 +12,7 @@ function FlightCard({ flight }) {
           </div>
           <div className='flex flex-col px-2'>
             <div>Pilot: {flight.pilot}</div>
-            <div>{flight.user.country}</div>
+            <div>{user? user.country : flight.user.country}</div>
           </div>
           <div className='flex flex-col px-2'>
             <div>Glider: {flight.glider_model}</div>

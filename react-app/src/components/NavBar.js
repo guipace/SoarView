@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import { UploadModal } from './Modals';
 
@@ -33,7 +33,7 @@ const NavBar = ({ setAuthenticated }) => {
         {/* <div id='navbar-placeholder' className='h-20'></div> */}
         {dropdownVisible &&
           <div className='bg-primary w-32 fixed top-20 right-0 flex flex-col z-50' onMouseLeave={() => setDropdownVisible(prev => !prev)}>
-            <div className='text-center	py-2 hover:bg-secondary'>My Profile</div>
+            <Link className='text-center	py-2 hover:bg-secondary' to={`/user/${sessionUser.id}`}>My Profile</Link>
             <div className='hover:bg-secondary'>
               <LogoutButton setAuthenticated={setAuthenticated} />
             </div>

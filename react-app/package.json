@@ -15,6 +15,7 @@
     "http-proxy-middleware": "^1.0.5",
     "igc-parser": "^1.0.0",
     "ol": "^6.5.0",
+    "ol-layerswitcher": "^3.8.3",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-redux": "^7.2.2",
@@ -47,6 +48,7 @@
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.3",
     "autoprefixer": "^9.8.6",
+    "dotenv": "^8.2.0",
     "postcss": "^7.0.35",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
   }
