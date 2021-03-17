@@ -55,31 +55,31 @@ function FlightSidebar({flight, sessionUser, igcParsedData}) {
                 <td className='pl-2'>Duration</td>
                 <td>{duration}</td>
             </tr>
-            <tr>
+            <tr className='bg-background'>
                 <td className='pl-2'>Pilot</td>
                 <td>{flight.pilot}</td>
             </tr>
-            <tr className='bg-background'>
+            <tr>
                 <td className='pl-2'>Copilot</td>
                 <td>{flight.copilot}</td>
             </tr>
-            <tr>
+            <tr className='bg-background'>
                 <td className='pl-2'>Glider</td>
                 <td>{flight.glider_model}</td>
             </tr>
-            <tr className='bg-background'>
+            <tr>
                 <td className='pl-2'>Class</td>
                 <td>{flight.glider_class}</td>
             </tr>
-            <tr>
+            <tr className='bg-background'>
                 <td className='pl-2'>Callsign</td>
                 <td>{flight.callsign}</td>
             </tr>
-            <tr className='bg-background'>
+            <tr>
                 <td className='pl-2'>Registration</td>
                 <td>{flight.registration}</td>
             </tr>
-            <tr>
+            <tr className='bg-background'>
                 <td className='pl-2'>Pilot Notes</td>
                 <td>{flight.note}</td>
             </tr>
