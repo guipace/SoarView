@@ -28,7 +28,6 @@ const EditForm = ({ flight, setShowEditModal }) => {
     }
 
     dispatch(editFlight(updatedData));
-
     setShowEditModal(false);
   };
 

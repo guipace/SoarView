@@ -1,12 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import UserCard from './UserCard';
 import { EditModal, DeleteModal } from '../Modals';
 import CommentSection from './CommentSection';
 
-function FlightSidebar({flight, sessionUser}) {
+function msToTime(duration) {
+  let milliseconds = parseInt((duration % 1000) / 100),
+    seconds = Math.floor((duration / 1000) % 60),
+    minutes = Math.floor((duration / (1000 * 60)) % 60),
+    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+  hours = (hours < 10) ? "0" + hours : hours;
+  minutes = (minutes < 10) ? "0" + minutes : minutes;
+
+  return hours + ":" + minutes;
+}
+
+function FlightSidebar({flight, sessionUser, igcParsedData}) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [duration, setDuration] = useState();
 
+  useEffect(() => {
+    if(igcParsedData) {
+      const startTime = new Date(igcParsedData.fixes[0].timestamp);
+      const endTime = new Date(igcParsedData.fixes[igcParsedData.fixes.length - 1].timestamp);
+      const flightDuration = msToTime(endTime - startTime);
+      setDuration(flightDuration);
+    }
+  }, [igcParsedData]);
 
   return ( flight && sessionUser &&
     <>
@@ -29,6 +50,10 @@ function FlightSidebar({flight, sessionUser}) {
             <tr className='bg-background'>
                 <td className='pl-2'>Date</td>
                 <td>{flight.date.split(' ').slice(0,4).join(' ')}</td>
+            </tr>
+            <tr>
+                <td className='pl-2'>Duration</td>
+                <td>{duration}</td>
             </tr>
             <tr>
                 <td className='pl-2'>Pilot</td>

@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faLinkedin, faAngellist } from '@fortawesome/free-brands-svg-icons';
 import { LoginModal, SignupModal } from '../Modals';
 
 function LandingPage({setAuthenticated}) {
@@ -34,7 +37,23 @@ function LandingPage({setAuthenticated}) {
             </button>
           </div>
         </div>
-        {/* <div>PLACEHOLDER FOR ABOUT THE DEVELOPER & TECHNOLOGIES</div> */}
+        <div className='bg-primary bg-opacity-70 shadow-lg mt-10 px-5 py-2 flex flex-col text-black text-opacity-70 rounded'>
+            <h5 className='font-fira'>About the Developer</h5>
+            <div className='flex justify-around items-center space-x-1 rounded'>
+              <a href='https://github.com/guipace'>
+                <FontAwesomeIcon className='text-2xl transform hover:scale-110' icon={faGithub}/>
+              </a>
+              <a href='https://www.linkedin.com/in/guilhermepace/'>
+                <FontAwesomeIcon className='text-2xl transform hover:scale-110' icon={faLinkedin}/>
+              </a>
+              <a href='https://angel.co/u/guilherme-pace'>
+                <FontAwesomeIcon className='text-2xl transform hover:scale-110' icon={faAngellist}/>
+              </a>
+              <a href='mailto:pace.gui@gmail.com'>
+                <FontAwesomeIcon className='text-2xl transform hover:scale-110' icon={faEnvelope}/>
+              </a>
+            </div>
+        </div>
       </div>
     </>
   );

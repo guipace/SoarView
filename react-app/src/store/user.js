@@ -23,6 +23,33 @@ export const getUser = (id) => async (dispatch) => {
   }
 };
 
+export const editUser = (updatedData) => async (dispatch) => {
+  const { id, email, first_name, last_name, country, image_file, password } = updatedData;
+
+  const form = new FormData();
+  form.append('email', email);
+  form.append('first_name', first_name);
+  form.append('last_name', last_name);
+  form.append('country', country);
+  if (image_file) {
+    form.append('image_file', image_file);
+  }
+  if (password) {
+    form.append('password', password);
+  }
+  
+  const res = await fetch(`/api/user/${id}`, {
+    method: "POST",
+    body: form,
+  })
+
+  if(res.ok) {
+    const data = await res.json()
+    dispatch(setUser(data));
+    return data;
+  }
+}
+
 const initialState = null;
 
 const userReducer = ( state = initialState, action ) => {
