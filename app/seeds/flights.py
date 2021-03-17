@@ -154,6 +154,7 @@ def seed_flights():
     db.session.add(flight10)
 
     db.session.commit()
+    db.session.execute("SELECT setval(pg_get_serial_sequence('flights', 'id'), coalesce(max(id)+1, 1), false) FROM flights;")
 
 
 def undo_flights():

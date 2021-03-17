@@ -82,6 +82,7 @@ def seed_users():
     db.session.add(john_swanson)
 
     db.session.commit()
+    db.session.execute("SELECT setval(pg_get_serial_sequence('users', 'id'), coalesce(max(id)+1, 1), false) FROM users;")
 
 # Uses a raw SQL query to TRUNCATE the users table.
 # SQLAlchemy doesn't have a built in function to do this
