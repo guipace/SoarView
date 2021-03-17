@@ -26,7 +26,7 @@ const UploadForm = ({ setShowUploadModal }) => {
       fileReader.onload = function() {
         try {
           let igcParsedData = IGCParser.parse(fileReader.result);
-          console.log(igcParsedData);
+          // console.log(igcParsedData);
           setIgcData(igcParsedData);
         } catch (err) {
           setErrors(err);
