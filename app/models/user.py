@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     flights = db.relationship('Flight', back_populates='user')
-    comments = db.relationship('Comment', back_populates='user')
+    comments = db.relationship('Comment', back_populates='user', cascade="all, delete")
 
     @property
     def password(self):
