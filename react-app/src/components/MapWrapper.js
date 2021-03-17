@@ -29,8 +29,6 @@ function MapWrapper(props) {
   const [ selectedCoord, setSelectedCoord ] = useState();
   const mapElement = useRef();
 
-  // console.log("Key ========= ", process.env.REACT_APP_BING_MAPS_KEY)
-
   // create state ref that can be accessed in OpenLayers onclick callback function
   const mapRef = useRef()
   mapRef.current = map
