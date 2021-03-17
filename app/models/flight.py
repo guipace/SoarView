@@ -20,7 +20,7 @@ class Flight(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     user = db.relationship('User', back_populates='flights')
-    comments = db.relationship('Comment', back_populates='flights')
+    comments = db.relationship('Comment', back_populates='flights', cascade="all, delete")
 
     def to_dict(self):
         return {
