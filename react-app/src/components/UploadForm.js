@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import IGCParser from 'igc-parser'
-import { useHistory } from "react-router";
+import { Redirect, useHistory } from "react-router";
 
 const UploadForm = ({ setShowUploadModal }) => {
   const history = useHistory();
@@ -54,6 +54,11 @@ const UploadForm = ({ setShowUploadModal }) => {
   const onUpload = async (e) => {
     e.preventDefault();
 
+    if (igcFile.name === "DemoFile.igc") {
+      setShowUploadModal(false);
+      return history.push('/flight/1');
+    }
+
     const form = new FormData();
     form.append('user_id', sessionUser.id);
     form.append('igcFile', igcFile);
@@ -80,7 +85,6 @@ const UploadForm = ({ setShowUploadModal }) => {
       setErrors(flight.errors);
     }
 
-
     // // SOLUTION 1 - FROM URL
     // let igcText = await fetch('https://soarview.s3.amazonaws.com/12sv1wz1.igc').then(res => res.blob()).then(blob => blob.text())
 
@@ -91,6 +95,14 @@ const UploadForm = ({ setShowUploadModal }) => {
     //   console.error(err);
     // }
   };
+
+  const onLoadTestFile = async () => {
+    let igcBlob = await fetch('https://soarview.s3.amazonaws.com/DemoFile.igc').then(res => res.blob())
+
+    let file = new File([igcBlob], "DemoFile.igc");
+    // console.log(file);
+    setIgcFile(file);
+  }
 
   return (
     <form onSubmit={onUpload} className='flex flex-col font-noto'>
@@ -105,6 +117,12 @@ const UploadForm = ({ setShowUploadModal }) => {
           name="igcFile"
           onChange={e => setIgcFile(e.target.files[0])}
         ></input>
+        <div
+        className="text-center bg-accent text-background font-bold p-0.5 uppercase text-xs rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none cursor-pointer"
+        onClick={() => onLoadTestFile()}
+        >
+          Load Test File
+        </div>
       </div>
       <div className='flex pb-2'>
         <label className='w-1/4'>Pilot Name</label>
