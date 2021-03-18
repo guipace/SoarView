@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import IGCParser from 'igc-parser'
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
 
 const UploadForm = ({ setShowUploadModal }) => {
   const history = useHistory();
@@ -26,7 +26,6 @@ const UploadForm = ({ setShowUploadModal }) => {
       fileReader.onload = function() {
         try {
           let igcParsedData = IGCParser.parse(fileReader.result);
-          // console.log(igcParsedData);
           setIgcData(igcParsedData);
         } catch (err) {
           setErrors(err);
@@ -36,7 +35,7 @@ const UploadForm = ({ setShowUploadModal }) => {
         setErrors(fileReader.error);
       };
     }
-  }, [igcFile])
+  }, [igcFile]);
 
   useEffect(() => {
     //Populate form with IGC file data
@@ -87,7 +86,6 @@ const UploadForm = ({ setShowUploadModal }) => {
 
     // // SOLUTION 1 - FROM URL
     // let igcText = await fetch('https://soarview.s3.amazonaws.com/12sv1wz1.igc').then(res => res.blob()).then(blob => blob.text())
-
     // try {
     //   let igcData = IGCParser.parse(igcText);
     //   console.log(igcData);
@@ -98,9 +96,7 @@ const UploadForm = ({ setShowUploadModal }) => {
 
   const onLoadTestFile = async () => {
     let igcBlob = await fetch('https://soarview.s3.amazonaws.com/DemoFile.igc').then(res => res.blob())
-
     let file = new File([igcBlob], "DemoFile.igc");
-    // console.log(file);
     setIgcFile(file);
   }
 
