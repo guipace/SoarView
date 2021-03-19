@@ -17,7 +17,6 @@ function FlightPage() {
   const [ igcParsedData, setIgcParsedData ] = useState();
   const [ features, setFeatures ] = useState([])
 
-
   useEffect(() => {
     dispatch(getFlight(id));
     dispatch(getComments(id));
