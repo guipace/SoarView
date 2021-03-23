@@ -54,7 +54,7 @@ function FlightPage() {
 
   return (
     <div className='mt-20 flex-1 flex flex-col md:flex-row'>
-      <MapWrapper features={features} />
+      <MapWrapper features={features} igcParsedData={igcParsedData}/>
       <FlightSidebar sessionUser={sessionUser} flight={flight} igcParsedData={igcParsedData}/>
     </div>
   )
