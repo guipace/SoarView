@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Line } from 'react-chartjs-2'
 import 'ol/ol.css';
 import 'ol-layerswitcher/dist/ol-layerswitcher.css';
 import LayerSwitcher from 'ol-layerswitcher';
@@ -8,9 +9,7 @@ import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import OSM from 'ol/source/OSM';
 import BingMaps from 'ol/source/BingMaps';
-import XYZ from 'ol/source/XYZ';
 import { transform } from 'ol/proj';
 import { defaults } from 'ol/control';
 import { Stroke, Style } from 'ol/style'
@@ -23,7 +22,7 @@ const polygonStyle = new Style({
   }),
 })
 
-function MapWrapper(props) {
+function MapWrapper({ features, igcParsedData }) {
   const [ map, setMap ] = useState();
   const [ featuresLayer, setFeaturesLayer ] = useState();
   const [ selectedCoord, setSelectedCoord ] = useState();
@@ -46,32 +45,6 @@ function MapWrapper(props) {
     const initialMap = new Map({
       target: mapElement.current,
       layers: [
-        // // USGS Topo
-        // new TileLayer({
-        //   source: new XYZ({
-        //     url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}',
-        //   }),
-        //   visible: false,
-        //   title: 'FIRST BASE MAP',
-        //   type: 'base',
-        // }),
-        // // OSM Standard
-        // new TileLayer({
-        //   source: new OSM(),
-        //   visible: false,
-        //   title: 'Standard',
-        //   type: 'base',
-        // }),
-        // // Stamen Terrain
-        // new TileLayer({
-        //   source: new XYZ({
-        //     url: 'http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg',
-        //     attributions: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
-        //   }),
-        //   visible: true,
-        //   title: 'Stamen Terrain',
-        //   type: 'base',
-        // }),
         // Bing Maps Satelite
         new TileLayer({
           source: new BingMaps({
@@ -127,21 +100,21 @@ function MapWrapper(props) {
   // update map if features prop changes
   useEffect(() => {
 
-    if (props.features.length) {// may be empty on first render
+    if (features.length) {// may be empty on first render
 
       // set features to map
       featuresLayer.setSource(
         new VectorSource({
-          features: props.features // make sure features is an array
+          features: features // make sure features is an array
         })
       );
 
       // fit map to feature extent (with 100px of padding)
       map.getView().fit(featuresLayer.getSource().getExtent(), {
-        padding: [100, 100, 100, 100]
+        padding: [50, 50, 50, 50]
       });
     }
-  }, [props.features]);
+  }, [features, featuresLayer, map]);
 
 
   // map click handler
@@ -157,8 +130,90 @@ function MapWrapper(props) {
     setSelectedCoord( transormedCoord )
   }
 
+  // Graph options
+  const options = {
+    maintainAspectRatio: false,
+    // elements: {
+    //   line: {
+    //     borderWidth: 0.1,
+    //   },
+    //   point: {
+    //     borderWidth: 0,
+    //   },
+    // },
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+            maxTicksLimit: 6,
+          },
+        },
+      ],
+      xAxes: [
+        {
+          ticks: {
+            beginAtZero: false,
+            maxRotation: 0,
+            // autoSkipPadding: 10,
+            maxTicksLimit: 10,
+          },
+          type: 'time',
+            time: {
+              displayFormats: {
+                minute: 'H:mm'
+              },
+              // minUnit: 'hour'
+            },
+            // bounds: 'ticks'
+        },
+      ],
+    },
+    legend: {
+      display: false,
+      labels: {
+          fontColor: 'rgb(255, 99, 132)'
+      }
+    },
+    title: {
+      display: true,
+      text: 'Flight height profile',
+    }
+  }
+
+  // Graph data
+  let data;
+  if (igcParsedData) {
+    // console.log(igcParsedData.fixes);
+    data = {
+      // labels: igcParsedData.fixes.map(el => el.timestamp),
+      datasets: [
+        {
+          label: 'Height',
+          data: igcParsedData.fixes.map(el => {
+            let obj = {
+              y:el.gpsAltitude,
+              x:new Date(el.timestamp)
+            }
+            return obj
+          }),
+          fill: false,
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgba(236, 70, 70, 1)',
+          borderWidth: 3,
+          pointRadius: 0,
+        },
+      ],
+    }
+  }
+
   return (
-    <div className='map-container bg-tertiary w-full h-full md:w-9/12 md:order-2' ref={mapElement}></div>
+    <div className='bg-background w-full h-full md:w-9/12 md:order-2'>
+      <div className='map-container w-full h-5/6' ref={mapElement}></div>
+      <div className='w-full px-2'>
+        <Line className='' height={120} data={data} options={options} />
+      </div>
+    </div>
   )
 }
 
