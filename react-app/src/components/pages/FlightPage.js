@@ -37,7 +37,7 @@ function FlightPage() {
   useEffect( () => {
     if (igcData) {
       let parsedData = IGCParser.parse(igcData);
-      console.log(parsedData);
+      // console.log(parsedData);
       setIgcParsedData(parsedData);
     }
 

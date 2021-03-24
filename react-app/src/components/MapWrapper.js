@@ -133,14 +133,6 @@ function MapWrapper({ features, igcParsedData }) {
   // Graph options
   const options = {
     maintainAspectRatio: false,
-    // elements: {
-    //   line: {
-    //     borderWidth: 0.1,
-    //   },
-    //   point: {
-    //     borderWidth: 0,
-    //   },
-    // },
     scales: {
       yAxes: [
         {
@@ -155,7 +147,6 @@ function MapWrapper({ features, igcParsedData }) {
           ticks: {
             beginAtZero: false,
             maxRotation: 0,
-            // autoSkipPadding: 10,
             maxTicksLimit: 10,
           },
           type: 'time',
@@ -163,9 +154,7 @@ function MapWrapper({ features, igcParsedData }) {
               displayFormats: {
                 minute: 'H:mm'
               },
-              // minUnit: 'hour'
             },
-            // bounds: 'ticks'
         },
       ],
     },
@@ -184,7 +173,6 @@ function MapWrapper({ features, igcParsedData }) {
   // Graph data
   let data;
   if (igcParsedData) {
-    // console.log(igcParsedData.fixes);
     data = {
       // labels: igcParsedData.fixes.map(el => el.timestamp),
       datasets: [
