@@ -41,7 +41,6 @@ def post_comment():
 @comment_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_comment(id):
-    print('BACKEND ===================')
     comment = Comment.query.get(id)
     flight_id = comment.flight_id
     db.session.delete(comment)
