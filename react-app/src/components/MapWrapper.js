@@ -28,20 +28,20 @@ function MapWrapper({ features, igcParsedData }) {
   const [ selectedCoord, setSelectedCoord ] = useState();
   const mapElement = useRef();
 
-  // create state ref that can be accessed in OpenLayers onclick callback function
+  // Create state ref that can be accessed in OpenLayers onclick callback function
   const mapRef = useRef()
   mapRef.current = map
 
-  // initialize map on first render
+  // Initialize map on first render
   useEffect(() => {
 
-    // create and add vector source layer
+    // Create and add vector source layer
     const initialFeaturesLayer = new VectorLayer({
       source: new VectorSource(),
       style: polygonStyle
     })
 
-    // create map
+    // Create map
     const initialMap = new Map({
       target: mapElement.current,
       layers: [
@@ -54,7 +54,7 @@ function MapWrapper({ features, igcParsedData }) {
           title: 'Satelite',
           type: 'base',
         }),
-        // Bing Maps Satelite
+        // Bing Maps Roads
         new TileLayer({
           source: new BingMaps({
             key: bingApiKey,
@@ -89,7 +89,7 @@ function MapWrapper({ features, igcParsedData }) {
     });
     initialMap.addControl(layerSwitcher);
 
-    // save map and vector layer references to state
+    // Save map and vector layer references to state
     setMap(initialMap);
     setFeaturesLayer(initialFeaturesLayer);
 
@@ -97,19 +97,19 @@ function MapWrapper({ features, igcParsedData }) {
   }, []);
 
 
-  // update map if features prop changes
+  // Update map if features prop changes
   useEffect(() => {
 
-    if (features.length) {// may be empty on first render
+    if (features.length) {// May be empty on first render
 
-      // set features to map
+      // Set features to map
       featuresLayer.setSource(
         new VectorSource({
-          features: features // make sure features is an array
+          features: features // Make sure features is an array
         })
       );
 
-      // fit map to feature extent (with 100px of padding)
+      // Fit map to feature extent (with 50px of padding)
       map.getView().fit(featuresLayer.getSource().getExtent(), {
         padding: [50, 50, 50, 50]
       });
@@ -117,16 +117,16 @@ function MapWrapper({ features, igcParsedData }) {
   }, [features, featuresLayer, map]);
 
 
-  // map click handler
+  // Map click handler
   const handleMapClick = (event) => {
 
-    // get clicked coordinate using mapRef to access current React state inside OpenLayers callback
+    // Get clicked coordinate using mapRef to access current React state inside OpenLayers callback
     const clickedCoord = mapRef.current.getCoordinateFromPixel(event.pixel);
 
-    // transform coord to EPSG 4326 standard Lat Long
+    // Transform coord to EPSG 4326 standard Lat Long
     const transormedCoord = transform(clickedCoord, 'EPSG:3857', 'EPSG:4326')
 
-    // set React state
+    // Set React state
     setSelectedCoord( transormedCoord )
   }
 
