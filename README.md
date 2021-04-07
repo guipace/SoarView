@@ -1,11 +1,11 @@
 # SoarView
 
 <p align="center">
-    <img src="#" alt="SoarView" />
+    <img src="https://user-images.githubusercontent.com/63423828/113918339-eb6c2d80-97a7-11eb-999c-63a2e039b0ea.gif" alt="SoarView" />
 </p>
 
 ## What is SoarView?
-[SoarView](https://soarview.herokuapp.com) is an application for glider pilots to upload, review and share flights they've recorded on a GPS. It is built on React and Redux in the frontend and Flask in the backend on top of a PostgreSQL database.
+[SoarView](https://soarview.herokuapp.com) is a full-stack web application for glider pilots to upload, review and share flights they've recorded on a GPS. It is inspired on [OLC](www.onlinecontest.org). For more information on the world of soaring visit [The Soaring Society of America](www.ssa.org).
 
 ## Links
 * [Live Application](https://soarview.herokuapp.com)
@@ -16,40 +16,48 @@
 * Python
 * HTML5
 * CSS3
+* SQL
 
-## Technologies
-* React.js
-* Redux
-* Flask
-* SQLAlchemy
-* Alembic
-* PostgreSQL
+## Technologies Implemented
+* [React](https://reactjs.org/)
+* [Redux](https://redux.js.org/)
+* [Node.js](https://nodejs.org/)
+* [PostgreSQL](https://www.postgresql.org/)
+* [Flask](https://palletsprojects.com/p/flask/)
+* [SQLAlchemy](https://www.sqlalchemy.org/)
+* [Alembic](https://alembic.sqlalchemy.org/)
+* [OpenLayers](https://openlayers.org/)
+* [Chart.js](https://www.chartjs.org/)
+* [WTForms](https://wtforms.readthedocs.io/en/2.3.x/)
+* [Amazon Web Services S3](https://aws.amazon.com/s3/)
+* [Docker](https://www.docker.com/)
+* [FontAwesome](https://fontawesome.com/)
 * [TailwindCSS](https://tailwindcss.com)
-<!-- * [OpenCageData](https://opencagedata.com)
-* [Leaflet](https://leafletjs.com)
-* [React Leaflet](https://react-leaflet.js.org) -->
+* [Heroku](https://heroku.com/)
 
 ## Developing
+Below are instructions to run the application on a local development environment.
 
-### What you'll need on your machine:
-
+### Pre-installed requirements:
+* Python v3.8
 * PostgreSQL
-* Pipenv with Python v3.8
+* Pipenv
 * Node.js
 
-1. `git clone` this repo
-2. `cd` into the local repo
-3. Run `pipenv install -r --dev dev-requirements.txt && pipenv install -r requirements.txt`
-4. Create your own `.env` file based on the provided `.env.example`.
-5. Create a user and database in your PostgreSQL that matches your `.env` configuration
-6. In the first terminal, run `pipenv shell` to activate the Pipenv environment.
-7. Run `flask db upgrade` and then `flask seed all` to apply migrations and seed data to your database.
-8. Open another terminal window and `cd` into the local repo, then `cd` into `react-app`
-9. Run `npm install`
-10. In your terminal running Pipenv shell, run `flask run`.
-11. In your terminal in the `react-app`, run `npm start`.
-12. Your app should open in your default browser.
-13. If you are planning on developing, please make a fork and create pull requests as necessary.
+### Instructions:
+1. Clone this repository: `git clone https://github.com/guipace/SoarView.git`
+2. Change directory: `cd SoarView`
+3. Create python environment & install dependencies: `pipenv install -r --dev dev-requirements.txt && pipenv install -r requirements.txt`
+4. Create your own environment variables files (`.env`) based on the provided examples (`.env.example`) in the project's root directory and react-app directory.
+5. Create a user and database in your PostgreSQL that matches your environment variables configuration.
+6. In a terminal activate the Pipenv environment: `pipenv shell`
+7. Apply migrations to the database: `flask db upgrade`
+8. Seed the database: `flask seed all`
+9. In another terminal, change directories into the react-app directory: `cd react-app`
+10. Install node modules: `npm install`
+11. Run backend application in first terminal: `flask run`
+12. Run the frontend application in second terminal: `npm start`
+13. Your app should open in your default browser.
 
 ## Challenges
 
