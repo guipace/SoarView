@@ -54,10 +54,10 @@ const UploadForm = ({ setShowUploadModal }) => {
   const onUpload = async (e) => {
     e.preventDefault();
 
-    if (igcFile.name === "DemoFile.igc") {
-      setShowUploadModal(false);
-      return history.push('/flight/1');
-    }
+    // if (igcFile.name === "DemoFile.igc") {
+    //   setShowUploadModal(false);
+    //   return history.push('/flight/1');
+    // }
 
     const form = new FormData();
     form.append('user_id', sessionUser.id);
@@ -106,7 +106,7 @@ const UploadForm = ({ setShowUploadModal }) => {
       <ul id="login-errors" className="block my-2 text-center text-red-600 font-bold">
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>IGC File</label>
         <input
           className='flex-grow ml-2'
@@ -121,7 +121,7 @@ const UploadForm = ({ setShowUploadModal }) => {
           Load Test File
         </div>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Pilot Name</label>
         <input
           className='flex-grow ml-2'
@@ -132,7 +132,7 @@ const UploadForm = ({ setShowUploadModal }) => {
           value={pilot}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Copilot Name</label>
         <input
           className='flex-grow ml-2'
@@ -143,7 +143,7 @@ const UploadForm = ({ setShowUploadModal }) => {
           value={copilot}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Glider Model</label>
         <input
           className='flex-grow ml-2'
@@ -154,7 +154,7 @@ const UploadForm = ({ setShowUploadModal }) => {
           value={glider_model}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Glider Class</label>
         <input
           className='flex-grow ml-2'
@@ -165,7 +165,7 @@ const UploadForm = ({ setShowUploadModal }) => {
           value={glider_class}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Callsign</label>
         <input
           className='flex-grow ml-2'
@@ -176,7 +176,7 @@ const UploadForm = ({ setShowUploadModal }) => {
           value={callsign}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Registration</label>
         <input
           className='flex-grow ml-2'
@@ -187,7 +187,7 @@ const UploadForm = ({ setShowUploadModal }) => {
           value={registration}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Notes</label>
         <textarea
           className='flex-grow ml-2'

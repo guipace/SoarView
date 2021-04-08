@@ -15,7 +15,7 @@ export function LoginModal({ showLoginModal, setShowLoginModal, setShowSignupMod
           className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
           onClick={() => setShowLoginModal(false)}
         >
-          <div className="relative w-auto my-6 mx-auto max-w-3xl" onClick={(e) => e.stopPropagation()}>
+          <div className="relative w-3/12 min-w-max my-6 mx-auto max-w-3xl" onClick={(e) => e.stopPropagation()}>
             {/*content*/}
             <div className="border-0 rounded shadow-lg relative flex flex-col w-full bg-background outline-none focus:outline-none">
               {/*header*/}
@@ -50,7 +50,7 @@ export function SignupModal({ showSignupModal, setShowSignupModal, setShowLoginM
           className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
           onClick={() => setShowSignupModal(false)}
         >
-          <div className="relative w-auto my-6 mx-auto max-w-3xl" onClick={(e) => e.stopPropagation()}>
+          <div className="relative w-3/12 min-w-max my-6 mx-auto max-w-3xl" onClick={(e) => e.stopPropagation()}>
             {/*content*/}
             <div className="border-0 rounded shadow-lg relative flex flex-col w-full bg-background outline-none focus:outline-none">
               {/*header*/}
@@ -85,7 +85,7 @@ export function EditProfileModal({ user, showEditProfileModal, setShowEditProfil
           className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
           onClick={() => setShowEditProfileModal(false)}
         >
-          <div className="relative w-auto my-6 mx-auto max-w-3xl" onClick={(e) => e.stopPropagation()}>
+          <div className="relative w-3/12 min-w-max my-6 mx-auto max-w-3xl" onClick={(e) => e.stopPropagation()}>
             {/*content*/}
             <div className="border-0 rounded shadow-lg relative flex flex-col w-full bg-background outline-none focus:outline-none">
               {/*header*/}
@@ -120,7 +120,7 @@ export function UploadModal({ showUploadModal, setShowUploadModal }) {
           className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
           onClick={() => setShowUploadModal(false)}
         >
-          <div className="relative w-auto my-6 mx-auto max-w-3xl" onClick={(e) => e.stopPropagation()}>
+          <div className="relative w-3/12 min-w-max my-6 mx-auto max-w-3xl" onClick={(e) => e.stopPropagation()}>
             {/*content*/}
             <div className="border-0 rounded shadow-lg relative flex flex-col w-full bg-background outline-none focus:outline-none">
               {/*header*/}
@@ -155,7 +155,7 @@ export function EditModal({ flight, showEditModal, setShowEditModal }) {
           className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
           onClick={() => setShowEditModal(false)}
         >
-          <div className="relative w-auto my-6 mx-auto max-w-3xl" onClick={(e) => e.stopPropagation()}>
+          <div className="relative w-3/12 min-w-max my-6 mx-auto max-w-3xl" onClick={(e) => e.stopPropagation()}>
             {/*content*/}
             <div className="border-0 rounded shadow-lg relative flex flex-col w-full bg-background outline-none focus:outline-none">
               {/*header*/}
@@ -170,7 +170,7 @@ export function EditModal({ flight, showEditModal, setShowEditModal }) {
                 </button>
               </div>
               {/*body*/}
-              <div className="relative px-6 pb-3 flex-auto">
+              <div className="relative px-6 py-3 flex-auto">
                 <EditForm flight={flight} setShowEditModal={setShowEditModal}/>
               </div>
             </div>
