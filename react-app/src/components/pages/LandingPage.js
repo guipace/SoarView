@@ -17,7 +17,8 @@ function LandingPage({setAuthenticated}) {
           <div>
             <img className='mx-auto' src='https://soarview.s3.amazonaws.com/logo_text.png' alt='logo' />
           </div>
-          <h1 className='font-hind text-background'>Track your flights with Soar View</h1>
+          <h1 className='font-hind text-center text-background'>Track your flights with SoarView</h1>
+          <h3 className='my-1 italic font-noto text-center text-background'>The destination for glider pilots to upload, review and share flights they've recorded</h3>
           <div className='mt-5 flex items-center justify-center'>
             <button
               className="bg-accent w-28 text-background font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none mx-1"
