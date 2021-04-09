@@ -14,7 +14,7 @@ const NavBar = ({ setAuthenticated }) => {
     sessionUser && (
       <>
         <UploadModal showUploadModal={showUploadModal} setShowUploadModal={setShowUploadModal} />
-        <nav className='fixed w-full flex items-center shadow-xl bg-primary h-20 text-accent font-bold z-49'>
+        <nav className='fixed w-full flex items-center shadow-xl bg-primary h-20 text-accent font-bold z-40'>
           <NavLink className='hover:bg-secondary h-full flex items-center' to="/" exact={true} activeClassName="active">
             <img className='h-20 mx-5' src='https://soarview.s3.amazonaws.com/logo_text.png' alt='logo' />
           </NavLink>
