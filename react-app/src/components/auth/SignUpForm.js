@@ -80,12 +80,22 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
       </div>
       <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Image</label>
-        <input
+        {/* <input
           className='flex-grow ml-2'
           type="file"
           name="imageFile"
           onChange={e => setImageFile(e.target.files[0])}
-        ></input>
+        ></input> */}
+        {/* <div className="cursor-pointer overflow-hidden"> */}
+        <label className="cursor-pointer min-w-max ml-2 bg-accent hover:bg-red-700 text-background font-bold py-2 px-2 uppercase text-sm rounded shadow hover:shadow-lg outline-none focus:outline-none inline-flex items-center">
+          <svg fill="#FFF" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/>
+          </svg>
+          <span className="ml-1">Upload</span>
+          <input className="hidden" type="file" name="imageFile" onChange={e => setImageFile(e.target.files[0])} ></input>
+        </label>
+        <div className='bg-white flex-grow ml-1 py-1 whitespace-nowrap overflow-hidden'><span className="ml-2">{imageFile.name}</span></div>
       </div>
       <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Password</label>
