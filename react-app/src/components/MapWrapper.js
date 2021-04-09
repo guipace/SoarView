@@ -172,10 +172,9 @@ function MapWrapper({ features, igcParsedData }) {
   }
 
   // Graph data
-  let data;
+  let data = {};
   if (igcParsedData) {
     data = {
-      // labels: igcParsedData.fixes.map(el => el.timestamp),
       datasets: [
         {
           label: 'Height',

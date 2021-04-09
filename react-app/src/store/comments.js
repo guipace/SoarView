@@ -37,6 +37,20 @@ export const deleteComment = (id) => async (dispatch) => {
   };
 };
 
+export const editComment = (id, formData) => async (dispatch) => {
+  const res = await fetch(`/api/comments/${id}`, {
+    method: "PATCH",
+    body: formData,
+  })
+
+  if (res.ok) {
+    const comments = await res.json();
+    dispatch(setComments(comments));
+  } else {
+    return res.errors
+  }
+}
+
 export const postComment = (formData) => async (dispatch) => {
   const res = await fetch(`/api/comments/`, {
     method: "POST",

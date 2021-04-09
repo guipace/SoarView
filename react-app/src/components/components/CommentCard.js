@@ -1,16 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '../../store/comments';
 
-function CommentCard({comment}) {
+function CommentCard({comment, setComment, setIsEditing, setUpdateComment, isEditing}) {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
 
   const onDelete = () => {
     dispatch(deleteComment(comment.id))
+  }
+
+  const clickEdit = () => {
+    if (isEditing) {
+      setIsEditing(false);
+      setComment('');
+      setUpdateComment('');
+    } else {
+      setIsEditing(true);
+      setComment(comment.comment);
+      setUpdateComment(comment);
+    }
   }
 
   return ( sessionUser &&
@@ -27,9 +39,14 @@ function CommentCard({comment}) {
           <div className=''>{comment.comment}</div>
         </div>
         { sessionUser.id === comment.user.id &&
-        <div onClick={onDelete} className='cursor-pointer'>
-          <FontAwesomeIcon className='text-accent text-sm transform hover:scale-110' icon={faTrashAlt} />
-        </div>}
+        <>
+          <div onClick={clickEdit} className='cursor-pointer mr-1'>
+            <FontAwesomeIcon className='text-gray-600 text-sm transform hover:scale-110' icon={faEdit} />
+          </div>
+          <div onClick={onDelete} className='cursor-pointer'>
+            <FontAwesomeIcon className='text-accent text-sm transform hover:scale-110' icon={faTrashAlt} />
+          </div>
+        </>}
       </div>
   )
 }
