@@ -36,7 +36,7 @@ const EditForm = ({ flight, setShowEditModal }) => {
       {/* <ul id="login-errors" className="block my-2 text-center text-red-600 font-bold">
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul> */}
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Pilot Name</label>
         <input
           className='flex-grow ml-2'
@@ -47,7 +47,7 @@ const EditForm = ({ flight, setShowEditModal }) => {
           value={pilot}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Copilot Name</label>
         <input
           className='flex-grow ml-2'
@@ -58,7 +58,7 @@ const EditForm = ({ flight, setShowEditModal }) => {
           value={copilot}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Glider Model</label>
         <input
           className='flex-grow ml-2'
@@ -69,7 +69,7 @@ const EditForm = ({ flight, setShowEditModal }) => {
           value={glider_model}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Glider Class</label>
         <input
           className='flex-grow ml-2'
@@ -80,7 +80,7 @@ const EditForm = ({ flight, setShowEditModal }) => {
           value={glider_class}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Callsign</label>
         <input
           className='flex-grow ml-2'
@@ -91,7 +91,7 @@ const EditForm = ({ flight, setShowEditModal }) => {
           value={callsign}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Registration</label>
         <input
           className='flex-grow ml-2'
@@ -102,7 +102,7 @@ const EditForm = ({ flight, setShowEditModal }) => {
           value={registration}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Notes</label>
         <textarea
           className='flex-grow ml-2'
@@ -115,7 +115,7 @@ const EditForm = ({ flight, setShowEditModal }) => {
       <div className="relative px-6 pb-3 flex-auto flex justify-around">
         <button
           className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
-          type="submit">Edit</button>
+          type="submit">Update</button>
         <button
           className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
           onClick={() => setShowEditModal(false)}

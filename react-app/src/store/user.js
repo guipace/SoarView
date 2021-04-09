@@ -37,7 +37,7 @@ export const editUser = (updatedData) => async (dispatch) => {
   if (password) {
     form.append('password', password);
   }
-  
+
   const res = await fetch(`/api/user/${id}`, {
     method: "POST",
     body: form,
@@ -45,7 +45,11 @@ export const editUser = (updatedData) => async (dispatch) => {
 
   if(res.ok) {
     const data = await res.json()
-    dispatch(setUser(data));
+
+    if (!data.errors) {
+      dispatch(setUser(data));
+    }
+
     return data;
   }
 }

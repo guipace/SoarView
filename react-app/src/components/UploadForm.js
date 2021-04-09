@@ -21,20 +21,26 @@ const UploadForm = ({ setShowUploadModal }) => {
   useEffect(() => {
     //Parse IGC file
     if (igcFile) {
-      let fileReader = new FileReader();
-      fileReader.readAsText(igcFile);
-      fileReader.onload = function() {
-        try {
-          let igcParsedData = IGCParser.parse(fileReader.result);
-          console.log(igcParsedData);
-          setIgcData(igcParsedData);
-        } catch (err) {
-          setErrors(err);
-        }
-      };
-      fileReader.onerror = function() {
-        setErrors(fileReader.error);
-      };
+      let igcConfirmation = igcFile.name.split('.');
+      if (igcConfirmation[igcConfirmation.length - 1].toLowerCase() === 'igc') {
+        let fileReader = new FileReader();
+        fileReader.readAsText(igcFile);
+        fileReader.onload = function() {
+          try {
+            let igcParsedData = IGCParser.parse(fileReader.result);
+            console.log(igcParsedData);
+            setIgcData(igcParsedData);
+          } catch (err) {
+            setErrors(err);
+          }
+        };
+        fileReader.onerror = function() {
+          setErrors(fileReader.error);
+        };
+      } else {
+        setErrors(['We can only accept IGC files at the moment']);
+        setIgcFile('');
+      }
     }
   }, [igcFile]);
 
@@ -54,10 +60,10 @@ const UploadForm = ({ setShowUploadModal }) => {
   const onUpload = async (e) => {
     e.preventDefault();
 
-    if (igcFile.name === "DemoFile.igc") {
-      setShowUploadModal(false);
-      return history.push('/flight/1');
-    }
+    // if (igcFile.name === "DemoFile.igc") {
+    //   setShowUploadModal(false);
+    //   return history.push('/flight/1');
+    // }
 
     const form = new FormData();
     form.append('user_id', sessionUser.id);
@@ -106,22 +112,31 @@ const UploadForm = ({ setShowUploadModal }) => {
       <ul id="login-errors" className="block my-2 text-center text-red-600 font-bold">
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>IGC File</label>
-        <input
+        {/* <input
           className='flex-grow ml-2'
           type="file"
           name="igcFile"
           onChange={e => setIgcFile(e.target.files[0])}
-        ></input>
+        ></input> */}
+        <label className="cursor-pointer min-w-max ml-2 bg-accent hover:bg-red-700 text-background font-bold py-2 px-2 uppercase text-sm rounded shadow hover:shadow-lg outline-none focus:outline-none inline-flex items-center">
+          <svg fill="#FFF" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/>
+          </svg>
+          <span className="ml-1">Upload</span>
+          <input className="hidden" type="file" name="imageFile" onChange={e => setIgcFile(e.target.files[0])} ></input>
+        </label>
+        <div className='bg-white flex-grow ml-1 py-1 whitespace-nowrap overflow-hidden'><span className="ml-2">{igcFile.name}</span></div>
         <div
-        className="text-center bg-accent text-background font-bold p-0.5 uppercase text-xs rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none cursor-pointer"
+        className="text-center bg-white border-2	ml-1 border-accent text-accent font-bold p-0.5 uppercase text-xs rounded shadow hover:shadow-lg hover:bg-background	outline-none focus:outline-none cursor-pointer"
         onClick={() => onLoadTestFile()}
         >
-          Load Test File
+          Load Test <br/> File
         </div>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Pilot Name</label>
         <input
           className='flex-grow ml-2'
@@ -132,7 +147,7 @@ const UploadForm = ({ setShowUploadModal }) => {
           value={pilot}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Copilot Name</label>
         <input
           className='flex-grow ml-2'
@@ -143,7 +158,7 @@ const UploadForm = ({ setShowUploadModal }) => {
           value={copilot}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Glider Model</label>
         <input
           className='flex-grow ml-2'
@@ -154,7 +169,7 @@ const UploadForm = ({ setShowUploadModal }) => {
           value={glider_model}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Glider Class</label>
         <input
           className='flex-grow ml-2'
@@ -165,7 +180,7 @@ const UploadForm = ({ setShowUploadModal }) => {
           value={glider_class}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Callsign</label>
         <input
           className='flex-grow ml-2'
@@ -176,7 +191,7 @@ const UploadForm = ({ setShowUploadModal }) => {
           value={callsign}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Registration</label>
         <input
           className='flex-grow ml-2'
@@ -187,7 +202,7 @@ const UploadForm = ({ setShowUploadModal }) => {
           value={registration}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Notes</label>
         <textarea
           className='flex-grow ml-2'

@@ -25,7 +25,7 @@ const polygonStyle = new Style({
 function MapWrapper({ features, igcParsedData }) {
   const [ map, setMap ] = useState();
   const [ featuresLayer, setFeaturesLayer ] = useState();
-  const [ selectedCoord, setSelectedCoord ] = useState();
+  const [ /*selectedCoord*/, setSelectedCoord ] = useState();
   const mapElement = useRef();
 
   // Create state ref that can be accessed in OpenLayers onclick callback function
@@ -110,6 +110,7 @@ function MapWrapper({ features, igcParsedData }) {
       );
 
       // Fit map to feature extent (with 50px of padding)
+      map.updateSize();
       map.getView().fit(featuresLayer.getSource().getExtent(), {
         padding: [50, 50, 50, 50]
       });
@@ -171,10 +172,9 @@ function MapWrapper({ features, igcParsedData }) {
   }
 
   // Graph data
-  let data;
+  let data = {};
   if (igcParsedData) {
     data = {
-      // labels: igcParsedData.fixes.map(el => el.timestamp),
       datasets: [
         {
           label: 'Height',
@@ -196,9 +196,9 @@ function MapWrapper({ features, igcParsedData }) {
   }
 
   return (
-    <div className='bg-background w-full h-full md:w-9/12 md:order-2'>
-      <div className='map-container w-full h-5/6' ref={mapElement}></div>
-      <div className='w-full px-2'>
+    <div className='flex flex-col bg-background w-full min-h-max md:w-9/12 md:order-2'>
+      <div className='flex-grow map-container w-full min-h-max' ref={mapElement}></div>
+      <div className='w-full px-2 min-h-max'>
         <Line className='' height={120} data={data} options={options} />
       </div>
     </div>

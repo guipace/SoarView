@@ -4,6 +4,7 @@ from app.models import User, db
 from app.forms import EditProfileForm
 from .auth_routes import validation_errors_to_error_messages
 from app.aws_s3 import s3, upload_file_to_s3
+from app.config import Config
 
 user_routes = Blueprint('users', __name__)
 

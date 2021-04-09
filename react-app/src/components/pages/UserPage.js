@@ -41,6 +41,7 @@ function UserPage() {
           </div>
           <div>
             <h2 className='font-fira'>Logbook</h2>
+            {user.flights.length === 0 && <h3 className='text-center mt-2'>No flights have been uploaded</h3>}
             {user.flights.map((flight, idx) =>
               <div className='flex items-center font-fira' key={flight.id}>
                 <h2 className='mr-1'>{user.flights.length - idx}</h2>

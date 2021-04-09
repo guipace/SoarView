@@ -29,16 +29,12 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
     }
   };
 
-  // if (authenticated) {
-  //   return <Redirect to="/" />;
-  // }
-
   return (
     <form onSubmit={onSignUp} className='flex flex-col font-noto'>
       <ul id="login-errors" className="block my-2 text-center text-red-600 font-bold">
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Email</label>
         <input
           className='flex-grow ml-2'
@@ -49,7 +45,7 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
           value={email}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>First Name</label>
         <input
           className='flex-grow ml-2'
@@ -60,7 +56,7 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
           value={firstName}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Last Name</label>
         <input
           className='flex-grow ml-2'
@@ -71,7 +67,7 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
           value={lastName}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Country</label>
         <input
           className='flex-grow ml-2'
@@ -82,16 +78,26 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
           value={country}
         ></input>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Image</label>
-        <input
+        {/* <input
           className='flex-grow ml-2'
           type="file"
           name="imageFile"
           onChange={e => setImageFile(e.target.files[0])}
-        ></input>
+        ></input> */}
+        {/* <div className="cursor-pointer overflow-hidden"> */}
+        <label className="cursor-pointer min-w-max ml-2 bg-accent hover:bg-red-700 text-background font-bold py-2 px-2 uppercase text-sm rounded shadow hover:shadow-lg outline-none focus:outline-none inline-flex items-center">
+          <svg fill="#FFF" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/>
+          </svg>
+          <span className="ml-1">Upload</span>
+          <input className="hidden" type="file" name="imageFile" onChange={e => setImageFile(e.target.files[0])} ></input>
+        </label>
+        <div className='bg-white flex-grow ml-1 py-1 whitespace-nowrap overflow-hidden'><span className="ml-2">{imageFile.name}</span></div>
       </div>
-      <div className='flex pb-2'>
+      <div className='flex pb-2 items-center'>
         <label className='w-1/4'>Password</label>
         <input
           className='flex-grow ml-2'
@@ -117,7 +123,7 @@ const SignUpForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated })
       <button
         className="self-center w-28 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
         type="submit">Sign Up</button>
-      <div className='self-center text-sm'>Already a member? <span className='text-accent cursor-pointer' onClick={() => {setShowLoginModal(true); setShowSignupModal(false)}}>Log in here.</span></div>
+      <div className='self-center text-sm'>Already a member? <span className='text-accent cursor-pointer hover:underline' onClick={() => {setShowLoginModal(true); setShowSignupModal(false)}}>Log in here.</span></div>
     </form>
   );
 };
