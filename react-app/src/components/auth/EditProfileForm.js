@@ -28,7 +28,7 @@ const EditProfileForm = ({ user, setShowEditProfileModal }) => {
         password,
       }
 
-      const updatedUser = dispatch(editUser(updatedData));
+      const updatedUser = await dispatch(editUser(updatedData));
 
       if (!updatedUser.errors) {
         setShowEditProfileModal(false);
