@@ -21,7 +21,11 @@ const LoginForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated }) 
   };
 
   const loginDemo = async () => {
-    const user = await login('demo@email.com', 'password');
+    setEmail('demo@email.com');
+    setPassword('password');
+
+    const user = await login(email, password);
+
     if (!user.errors) {
       setAuthenticated(true);
       dispatch(setUser(user));
@@ -62,9 +66,9 @@ const LoginForm = ({ setShowLoginModal, setShowSignupModal, setAuthenticated }) 
           className="self-center w-28 h-12 mx-2 bg-accent text-background font-bold uppercase text-sm px-6 py-3 my-3 rounded shadow hover:shadow-lg hover:bg-red-700	outline-none focus:outline-none"
           type="submit">Log In</button>
         <button
-          onClick={e => loginDemo()}
+          onClick={loginDemo}
           className="self-center w-28 h-12 mx-2 bg-white border-2	border-accent text-accent font-bold uppercase text-sm px-6 py-auto my-3 rounded shadow hover:shadow-lg hover:bg-background	outline-none focus:outline-none"
-          type="submit">Demo Account</button>
+        >Demo Account</button>
       </div>
       <div className='self-center text-sm'>Not yet a member? <span className='text-accent cursor-pointer hover:underline' onClick={() => {setShowLoginModal(false); setShowSignupModal(true)}}>Sign up here.</span></div>
     </form>
