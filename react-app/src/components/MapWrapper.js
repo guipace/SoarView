@@ -25,7 +25,7 @@ const polygonStyle = new Style({
 function MapWrapper({ features, igcParsedData }) {
   const [ map, setMap ] = useState();
   const [ featuresLayer, setFeaturesLayer ] = useState();
-  const [ selectedCoord, setSelectedCoord ] = useState();
+  const [ /*selectedCoord*/, setSelectedCoord ] = useState();
   const mapElement = useRef();
 
   // Create state ref that can be accessed in OpenLayers onclick callback function
